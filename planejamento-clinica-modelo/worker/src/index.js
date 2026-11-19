@@ -49,9 +49,19 @@ function ordemAnexo(nome) {
   return m ? parseInt(m[1], 10) : 1;
 }
  
+// Link do vídeo no Drive: ignora capa, foto e imagem; prefere a linha que diz "Vídeo"
 function primeiroVideoDrive(desc) {
-  const m = /drive\.google\.com\/file\/d\/([A-Za-z0-9_-]{20,})/.exec(desc || "");
-  return m ? m[1] : null;
+  const t = String(desc || "");
+  const re = /drive\.google\.com\/file\/d\/([A-Za-z0-9_-]{20,})/g;
+  const achados = [];
+  let m;
+  while ((m = re.exec(t))) {
+    const linha = t.slice(t.lastIndexOf("\n", m.index) + 1, m.index).toLowerCase();
+    if (/capa|foto|imagem|thumb/.test(linha)) continue;
+    achados.push({ id: m[1], video: /v[ií]deo/.test(linha) });
+  }
+  const a = achados.find(x => x.video) || achados[0];
+  return a ? a.id : null;
 }
  
 async function rotaCard(req, env, id) {
