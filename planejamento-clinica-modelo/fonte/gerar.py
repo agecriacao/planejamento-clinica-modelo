@@ -7,21 +7,21 @@ import os
 SITE = os.environ.get("MODO", "site") == "site"
 import base64
 AGE_LOGO = "data:image/png;base64," + open(AQUI / "age_logo.b64.txt").read().strip()
-
+ 
 DIAS = ["seg", "ter", "qua", "qui", "sex", "sáb", "dom"]
-
+ 
 def fd(s):
     if not s:
         return ""
     x = dt.date.fromisoformat(s)
     return f"{DIAS[x.weekday()]} {x.day:02d}/{x.month:02d}"
-
+ 
 E = html.escape
-
-
+ 
+ 
 import json as _json, re as _re
 TRELLO = _json.load(open(AQUI / "trello_desc.json"))
-
+ 
 def _limpa(t):
     t = t.replace("‌", "")
     t = _re.sub(r'\[([^\[\]]*)\]\((https?://[^)]*)\)', lambda m: "" if _re.sub(r'[\*\s]', '', m.group(1)).lower() in ("foto", "video", "vídeo") or m.group(1).startswith("http") else m.group(1), t)
@@ -32,10 +32,10 @@ def _limpa(t):
     linhas = [l.rstrip() for l in t.split("\n")]
     linhas = [l for l in linhas if "Planyway" not in l and not l.strip().startswith("#")]
     return "\n".join(linhas).strip()
-
+ 
 def _secoes(desc):
     return [x.strip() for x in _re.split(r'\n-{3,}\s*\n?', desc)]
-
+ 
 def legenda_de(code):
     desc = TRELLO.get(code, "")
     for sec in _secoes(desc):
@@ -44,12 +44,12 @@ def legenda_de(code):
             corpo = sec.split("\n", 1)[1] if "\n" in sec else ""
             return _limpa(corpo)
     return ""
-
+ 
 def telas_de(code):
     desc = TRELLO.get(code, "")
     secs = _secoes(desc)
     return _limpa(secs[0]) if secs else ""
-
+ 
 def texto_html(t):
     out = []
     for bloco in _re.split(r'\n\s*\n', t):
@@ -61,20 +61,20 @@ def texto_html(t):
         else:
             out.append("<p>" + "<br>".join(E(l) for l in ls) + "</p>")
     return "".join(out)
-
+ 
 WA_NUMERO = ""  # número da AGE com DDI, ex.: 5511999999999
-
+ 
 def wa(texto):
     from urllib.parse import quote
     base = f"https://wa.me/{WA_NUMERO}" if WA_NUMERO else "https://wa.me/"
     return base + "?text=" + quote(texto)
-
+ 
 def em_producao(it):
     return it["st"] in ("prop", "rev", "prog") and not it.get("video") and it.get("mat") != "A gravar"
-
+ 
 def drive(i):
     return f"https://drive.google.com/file/d/{i}/view"
-
+ 
 STATUS = {
     "pub":    ("Publicado", "ok"),
     "late":   ("Publicado com atraso", "warn"),
@@ -86,7 +86,7 @@ STATUS = {
     "noplan": ("Não planejado", "mute"),
     "prop":   ("Proposta", "prop"),
 }
-
+ 
 # ---------------------------------------------------------------- dados
 MESES = [
  {
@@ -251,17 +251,16 @@ MESES = [
   ],
  },
 ]
-
+ 
 BANCO = [
- ("Reels", "5 exames importantes para o glaucoma", "Dra. Adriana + Dr. Alisson", "Gravado", "Março de 2027, na Semana Mundial do Glaucoma", "Tem o mesmo link do Drive que “Exames glaucoma”: conferir se são vídeos diferentes.", "1zdZ9M3ZuLjuLMu6HuPU0e24uT4_PA6Vo"),
- ("Reels", "Exames glaucoma", "Dra. Adriana + Dr. Alisson", "Gravado", "Março de 2027", "", "1zdZ9M3ZuLjuLMu6HuPU0e24uT4_PA6Vo"),
+ ("Reels", "5 exames importantes para o glaucoma", "Dra. Adriana + Dr. Alisson", "Gravado", "Março de 2027, na Semana Mundial do Glaucoma", "", "1zdZ9M3ZuLjuLMu6HuPU0e24uT4_PA6Vo"),
  ("Carrossel", "Exames para diagnóstico e acompanhamento do glaucoma", "", "Em produção", "Março de 2027", "", ""),
  ("Carrossel", "Exames para avaliação da retina", "", "Pronto", "Uma semana de retina ou de exames, a definir", "Adiado em novembro.", ""),
  ("Vídeos", "Apresentação da equipe (10 vídeos)", "Médicos e técnicos", "Gravados", "A combinar", "Sugestão: série nos stories e no destaque da equipe.", ""),
  ("Vídeo", "Vídeo para a TV da clínica", "", "Pronto", "Recepção", "", "1SHtd3n6uLSlE2DRdljDGSw7my3iJBXwj"),
  ("Reels", "Medir a pressão intraocular", "Dra. Adriana + Dr. Alisson", "Reprovado", "Só com novo roteiro e nova aprovação", "", "1tinEHqcm2GnwnA7h_ScE60w9EOXg9EtD"),
 ]
-
+ 
 GRAVACAO = [
  ("Dezembro", [
    ("Respostas sobre blefaroplastia", "Dr. João Victor"),
@@ -282,12 +281,12 @@ GRAVACAO = [
    ("Retinopatia diabética sem sintomas", "Dra. Adriana + Dra. Jane"),
  ]),
 ]
-
+ 
 # ---------------------------------------------------------------- render
 def chip(st):
     lab, cls = STATUS[st]
     return f'<span class="chip c-{cls}">{E(lab)}</span>'
-
+ 
 def item_html(it, mes_id, wi, ii):
     st = it["st"]
     extra = ""
@@ -330,7 +329,7 @@ def item_html(it, mes_id, wi, ii):
             esconder = " hidden" if (em_producao(it) or not tem_card) else ""
             acoes.append(f'<button type="button" class="btn-aprovar js-aprovar"{esconder}>✓ Aprovar conteúdo</button>')
         acoes.append(f'<button type="button" class="btn-sec js-comentar"{"" if tem_card else " hidden"}>💬 Comentar</button>')
-        linhas.append(midia + '<div class="player" hidden></div>')
+        linhas.append(midia)
         linhas.append('<div class="acoes-card">' + "".join(acoes) + '</div>')
         linhas.append('<form class="form-cmt" hidden><label>Comentário<textarea rows="3" maxlength="2000"></textarea></label><div class="acoes-card"><button type="submit" class="btn-ver">Enviar ao Trello</button><button type="button" class="btn-sec js-cancelar">Cancelar</button></div></form><p class="retorno" role="status"></p>')
         if extras:
@@ -356,17 +355,17 @@ def item_html(it, mes_id, wi, ii):
   {"".join(linhas)}
   <button class="cmt" type="button" hidden>Comentar</button>
 </article>'''
-
+ 
 PLURAL = {"pub": ("publicado", "publicados"), "reprov": ("reprovado", "reprovados"),
           "nexec": ("não produzido", "não produzidos"), "adiado": ("adiado", "adiados"),
           "rev": ("em revisão", "em revisão"), "prog": ("programado", "programados"),
           "prop": ("proposto", "propostos")}
-
+ 
 def fim_iso(datas, mes_id):
     dd, mm = datas.split(" a ")[-1].strip().split("/")
     ano = 2027 if (mes_id == "janeiro" or mm == "01") else 2026
     return f"{ano}-{mm}-{dd}"
-
+ 
 def semana_html(s, mes_id, wi):
     itens = "".join(item_html(it, mes_id, wi, i) for i, it in enumerate(s["itens"]))
     porque = "".join(f"<li>{E(p)}</li>" for p in s["porque"])
@@ -400,7 +399,16 @@ def semana_html(s, mes_id, wi):
     <button class="cmt" type="button" hidden>Comentar a semana</button>
   </div>
 </details>'''
-
+ 
+def seguir_html(m):
+    i = next(k for k, x in enumerate(MESES) if x["id"] == m["id"])
+    ant = MESES[i - 1] if i > 0 else None
+    prox = MESES[i + 1] if i + 1 < len(MESES) else None
+    nome = lambda x: E(x["nome"].split()[0])
+    a = f'<a class="seg ant" href="#{ant["id"]}">← {nome(ant)}</a>' if ant else '<span></span>'
+    b = f'<a class="seg prox" href="#{prox["id"]}">{nome(prox)} →</a>' if prox else '<span></span>'
+    return f'<nav class="seguir" aria-label="Outros meses">{a}{b}</nav>'
+ 
 def mes_html(m):
     sem = "".join(semana_html(s, m["id"], i) for i, s in enumerate(m["semanas"]))
     aviso = f'<p class="aviso">{E(m["aviso"])}</p>' if m.get("aviso") else ""
@@ -415,16 +423,42 @@ def mes_html(m):
   </div>
   {sem}
   {reman}
+  {seguir_html(m)}
 </section>'''
-
+ 
 def banco_html():
-    rows = "".join(f'''<tr data-comment-target><td><span class="fmt">{E(f)}</span></td><td><b>{E(t)}</b>{"<br><span class='quem'>"+E(q)+"</span>" if q else ""}{f'<div class="acoes-card"><a class="btn-ver" href="{drive(v)}" target="_blank" rel="noopener">▶ Ver vídeo</a></div>' if v else ""}</td><td>{E(s)}</td><td>{E(quando)}</td><td class="nota">{E(n)}</td></tr>''' for f,t,q,s,quando,n,v in BANCO)
-    return f'''<section class="mes" id="banco">
+    cards = ""
+    for f, t, q, sit, quando, n, v in BANCO:
+        if sit.startswith(("Gravad", "Pronto")):
+            ch = f'<span class="chip m-ready">{E(sit)}</span>'
+        elif sit.startswith("Reprovad"):
+            ch = chip("reprov")
+        else:
+            ch = f'<span class="chip m-todo">{E(sit)}</span>'
+        linhas = []
+        if q:
+            linhas.append(f'<p class="quem">{E(q)}</p>')
+        linhas.append(f'<p class="datas"><span><b>Quando entra</b> {E(quando)}</span></p>')
+        if n:
+            linhas.append(f'<p class="nota">{E(n)}</p>')
+        if v:
+            if SITE:
+                btn = f'<button type="button" class="btn-ver js-video" data-video="{v}" data-titulo="{E(f + ": " + t)}">▶ Ver vídeo</button>'
+            else:
+                btn = f'<a class="btn-ver" href="{drive(v)}" target="_blank" rel="noopener">▶ Ver vídeo</a>'
+            linhas.append(f'<div class="acoes-card">{btn}</div>')
+        cards += f'''<article class="card" data-comment-target>
+  <div class="card-top"><span class="fmt">{E(f)}</span><span class="chips">{ch}</span></div>
+  <h4>{E(t)}</h4>
+  {"".join(linhas)}
+  <button class="cmt" type="button" hidden>Comentar</button>
+</article>'''
+    return f'''<section class="mes fixa" id="banco">
   <div class="mes-head"><span class="tipo">Material pronto ou em andamento</span><h2>Banco de vídeos e posts</h2>
   <p class="intro">O que está gravado ou produzido e ainda não tem semana, com a sugestão de quando entra.</p></div>
-  <div class="tbl"><table><thead><tr><th>Formato</th><th>Conteúdo</th><th>Situação</th><th>Quando entra</th><th>Observação</th></tr></thead><tbody>{rows}</tbody></table></div>
+  <div class="grid">{cards}</div>
 </section>'''
-
+ 
 def grav_html():
     blocos = ""
     n = 0
@@ -449,20 +483,20 @@ def grav_html():
   </form>
   {'<p class="nota">As ideias enviadas entram como comentário no card “Ideias de vídeos — Dra. Adriana”, no Trello da AGE.</p>' if SITE else '<div class="enviadas"><h4>Ideias enviadas</h4><ul id="lista-ideias"><li class="vazio">Carregando…</li></ul></div>'}
 </div>'''
-    return f'''<section class="mes" id="gravacao">
+    return f'''<section class="mes fixa" id="gravacao">
   <div class="mes-head"><span class="tipo">Fim de novembro · data a confirmar</span><h2>Próxima gravação</h2>
   <p class="intro">{n} vídeos para dezembro e janeiro, definidos antes da gravação para que cada um já tenha semana e sequência. Se o dia não comportar todos, a prioridade é dezembro; parte de janeiro pode sair em formato mais simples.</p></div>
   <p class="lbl sug">Sugestões da equipe AGE</p>
   <div class="gwrap">{blocos}</div>
   {form}
 </section>'''
-
-nav = "".join(f'<a href="#{m["id"]}">{E(m["nome"].split()[0])}</a>' for m in MESES) + '<a href="#banco">Banco de vídeos</a><a href="#gravacao">Próxima gravação</a>'
+ 
+nav = "".join(f'<a href="#{m["id"]}">{E(m["nome"].split()[0])}</a>' for m in MESES)
 legenda = "".join(chip(k) for k in ["pub","prog","rev","adiado","reprov","nexec","prop"]) + '<span class="chip m-ready">Gravado / pronto</span><span class="chip m-todo">A gravar / a produzir</span>'
-
+ 
 CLAUDE_JS = ""  # a versão do Claude (artifact) não é gerada neste repositório
 SCRIPT_FINAL = open(AQUI / 'site_js.js').read() if SITE else CLAUDE_JS
-
+ 
 page = f'''<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -516,7 +550,12 @@ nav.meses a {{ color: var(--marrom); text-decoration: none; padding: 6px 14px; b
 nav.meses a:hover, nav.meses a:focus-visible {{ background: var(--areia); outline: none; }}
 nav.meses a[aria-current="page"] {{ background: var(--marrom); color: #fff; }}
 .js .mes {{ display: none; }}
-.js .mes.ativo {{ display: block; }}
+.js .mes.ativo, .js .mes.fixa {{ display: block; }}
+.seguir {{ display: flex; justify-content: space-between; gap: 12px; margin: 20px 0 4px; }}
+.seguir .seg {{ font: 600 .95rem var(--texto); color: var(--marrom); text-decoration: none; background: var(--areia); border-radius: 999px; padding: 10px 18px; }}
+.seguir .seg.prox {{ background: var(--marrom); color: #fff; margin-left: auto; }}
+.seguir .seg:focus-visible {{ outline: 2px solid var(--marrom); outline-offset: 2px; }}
+.mes.fixa {{ margin-top: 48px; }}
 .js .legenda.oculta {{ display: none; }}
 .legenda {{ display: flex; flex-wrap: wrap; gap: 6px; margin: 16px 0 8px; align-items: center; font-size: .85rem; }}
 .legenda > b {{ margin-right: 4px; color: var(--cinza); font-weight: 500; }}
@@ -576,8 +615,15 @@ details.semana:not([open]) {{ background: #F7F5F1; }}
 .quem-sou input {{ font: 600 .9rem var(--texto); color: var(--marrom); border: 1px solid var(--bege); border-radius: 6px; padding: 4px 8px; background: #fff; }}
 button.btn-ver, button.btn-sec, button.btn-aprovar {{ border: 0; cursor: pointer; }}
 button.btn-sec {{ border: 1px solid var(--marrom); }}
-.player {{ margin-top: 8px; position: relative; width: 100%; aspect-ratio: 9 / 16; max-height: 70vh; background: #000; border-radius: 8px; overflow: hidden; }}
-.player iframe {{ position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }}
+.video-modal {{ border: 0; padding: 0; background: transparent; max-width: none; max-height: none; width: 100%; height: 100%; }}
+.video-modal::backdrop {{ background: rgba(30, 22, 18, .82); }}
+.vm-box {{ position: fixed; inset: 0; margin: auto; width: min(92vw, calc((100dvh - 96px) * 9 / 16)); height: fit-content; display: flex; flex-direction: column; gap: 10px; }}
+.vm-top {{ display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #fff; }}
+.vm-titulo {{ margin: 0; font-weight: 600; font-size: .95rem; line-height: 1.3; }}
+.vm-fechar {{ flex: none; font: 600 .86rem var(--texto); background: #fff; color: var(--marrom); border: 0; border-radius: 999px; padding: 8px 14px; cursor: pointer; }}
+.vm-fechar:focus-visible {{ outline: 2px solid #fff; outline-offset: 2px; }}
+.vm-player {{ position: relative; width: 100%; aspect-ratio: 9 / 16; background: #000; border-radius: 10px; overflow: hidden; }}
+.vm-player iframe {{ position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }}
 .galeria {{ margin-top: 8px; display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; border-radius: 8px; }}
 .galeria img {{ flex: 0 0 100%; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; scroll-snap-align: start; border-radius: 8px; background: #F1ECE4; }}
 .galeria-nav {{ display: flex; justify-content: space-between; align-items: center; font-size: .8rem; color: var(--cinza); margin-top: 4px; }}
@@ -678,6 +724,7 @@ footer .ass {{ color: var(--tinta); }}
   {"".join(mes_html(m) for m in MESES)}
   {banco_html()}
   {grav_html()}
+  {'<dialog id="video-modal" class="video-modal" aria-label="Vídeo"><div class="vm-box"><div class="vm-top"><p class="vm-titulo"></p><button type="button" class="vm-fechar">✕ Fechar</button></div><div class="vm-player"></div></div></dialog>' if SITE else ''}
   <footer>
     <p class="ass">Todas as peças levam a identificação: Clínica de Olhos Modelo · Responsável técnica: Dra. Adriana Rodrigues Corpa | CRM-SP 87235 | RQE 56606</p>
     <p class="assin-rodape"><img class="logo-age" src="{AGE_LOGO}" alt="AGE Criação" width="62" height="30"><span>Planejamento editorial desenvolvido pela AGE Criação para a Clínica de Olhos Modelo.</span></p>
@@ -686,20 +733,19 @@ footer .ass {{ color: var(--tinta); }}
 </div>
 <script>
 (() => {{
-  const vistas = [...document.querySelectorAll("section.mes")].map(s => s.id);
+  const vistas = [...document.querySelectorAll("section.mes:not(.fixa)")].map(s => s.id);
   const inicial = "novembro";
   const legenda = document.querySelector(".legenda");
   function mostrar(rolar) {{
     const h = location.hash.slice(1);
     const id = vistas.includes(h) ? h : inicial;
-    document.querySelectorAll("section.mes").forEach(s => s.classList.toggle("ativo", s.id === id));
+    document.querySelectorAll("section.mes:not(.fixa)").forEach(s => s.classList.toggle("ativo", s.id === id));
     document.querySelectorAll("nav.meses a").forEach(a => {{
       if (a.getAttribute("href") === "#" + id) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
     }});
-    legenda.classList.toggle("oculta", id === "banco" || id === "gravacao");
     if (rolar) document.querySelector("nav.meses").scrollIntoView({{ block: "start" }});
   }}
-  document.querySelectorAll("nav.meses a").forEach(a => a.addEventListener("click", e => {{
+  document.querySelectorAll("nav.meses a, nav.seguir a").forEach(a => a.addEventListener("click", e => {{
     e.preventDefault();
     const alvo = a.getAttribute("href");
     if (location.hash !== alvo) location.hash = alvo; else mostrar(true);
@@ -714,6 +760,7 @@ footer .ass {{ color: var(--tinta); }}
 </body>
 </html>
 '''
-
+ 
 open(AQUI.parent / "site" / "index.html" if SITE else AQUI / "planejamento-claude.html", "w", encoding="utf-8").write(page)
 print("ok", len(page))
+ 
