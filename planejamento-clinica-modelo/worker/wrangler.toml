@@ -1,0 +1,11 @@
+name = "planejamento-clinica-modelo"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+# Quadro "[Clínica de Olhos Modelo] Produção de Conteúdo"
+BOARD_ID = "68ec0e6547601c7187a2c87b"
+# Card "Ideias de vídeos — Dra. Adriana" (lista ✨ Caixinhas de Ideias): recebe as ideias como comentário
+CARD_IDEIAS = "qdqmqpUI"
+# Endereço do site no GitHub Pages (preencher depois do primeiro deploy). "*" aceita qualquer origem.
+ALLOWED_ORIGIN = "*"
