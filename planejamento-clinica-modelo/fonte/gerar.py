@@ -152,7 +152,7 @@ MESES = [
                "Continua o que o Reels de 19/11 abriu, com o vídeo de cirurgia já gravado com o Dr. João Victor.",
                "O tema está previsto desde outubro. O glaucoma, com vídeos prontos, fica para março, na Semana Mundial do Glaucoma."],
     "itens": [
-      {"fmt": "Reels", "titulo": "Cirurgia de pálpebra", "video": "1nnv2a7y7bz9TIJGvFQyRV1-d7yFkQ7Zk", "quem": "Dra. Adriana + Dr. João Victor", "plan": "2026-11-23", "st": "prop", "mat": "Gravado"},
+      {"fmt": "Reels", "titulo": "Cirurgia de pálpebra", "video": "1i5DzpRoWhXgRVbm6Wnf8J43CWT4tBsSL", "quem": "Dra. Adriana + Dr. João Victor", "plan": "2026-11-23", "st": "prop", "mat": "Gravado"},
       {"fmt": "Carrossel", "titulo": "Blefaroplastia: estética, função ou os dois?", "plan": "2026-11-25", "st": "prop", "mat": "Texto a produzir", "nota": "A pálpebra protege e espalha a lágrima · o excesso de pele pode pesar no olhar e, em alguns casos, reduzir o campo de visão · por isso a indicação pode ser funcional, estética ou as duas · quem define é a avaliação. Convite: “Saiba quando procurar avaliação”."},
       {"fmt": "Carrossel", "titulo": "Exames para avaliação do olho seco", "trello": "Dtf2A6R0", "plan": "2026-11-27", "st": "prop", "mat": "Pronto (revisar)", "nota": "Liga a pálpebra à lágrima: a cada piscada, a pálpebra espalha a lágrima pela superfície do olho."},
     ],
@@ -170,7 +170,7 @@ MESES = [
                "Responde às dúvidas da caixinha de 25/11.",
                "Dezembro é quando muita gente planeja procedimentos para as férias. O conteúdo explica o planejamento sem prometer resultado nem prazo de recuperação."],
     "itens": [
-      {"fmt": "Reels", "titulo": "Caso de blefaroplastia que não deu certo", "quem": "Dra. Adriana + Dr. João Victor", "plan": "2026-11-30", "st": "prop", "mat": "Em edição", "nota": "Já gravado. Falta a foto do paciente, que a Dra. Adriana vai enviar. Para publicar, é preciso a autorização por escrito do paciente para uso da imagem."},
+      {"fmt": "Reels", "titulo": "Caso de blefaroplastia que não deu certo", "quem": "Dra. Adriana + Dr. João Victor", "plan": "2026-11-30", "st": "prop", "mat": "Em edição", "dra": "enviar a imagem do paciente", "nota": "Já gravado. Falta a foto do paciente, que a Dra. Adriana vai enviar. Para publicar, é preciso a autorização por escrito do paciente para uso da imagem."},
       {"fmt": "Carrossel", "titulo": "Antes da blefaroplastia: o que é avaliado", "plan": "2026-12-02", "st": "prop", "mat": "Texto a produzir", "nota": "Pálpebra e campo visual, saúde da superfície do olho (olho seco), expectativas, e o pós-operatório, que varia caso a caso. Validar com o Dr. João Victor."},
       {"fmt": "Reels", "titulo": "Respostas da caixinha: dúvidas sobre blefaroplastia", "quem": "Dr. João Victor", "plan": "2026-12-04", "st": "prop", "mat": "A gravar", "nota": "Perguntas reais da caixinha. Se a gravação for antes, usar dúvidas frequentes do consultório."},
     ]},
@@ -191,15 +191,16 @@ MESES = [
       {"fmt": "Reels", "titulo": "Sol, piscina e mar: o que muda para os olhos nas férias", "quem": "Dra. Adriana + colega", "plan": "2026-12-14", "st": "prop", "mat": "A gravar"},
       {"fmt": "Carrossel", "titulo": "Checklist dos olhos para as férias", "plan": "2026-12-16", "st": "prop", "mat": "Texto a produzir", "nota": "Óculos de sol com proteção UV · lente de contato longe da piscina e do mar · protetor solar sem irritar os olhos · colírios de uso contínuo na mala · consulta antes de viajar para quem faz acompanhamento."},
       {"fmt": "Reels", "titulo": "Férias das crianças: as telas não precisam ser vilãs", "quem": "Dra. Renata ou Dra. Natalia", "plan": "2026-12-18", "st": "prop", "mat": "A gravar", "nota": "Mais tempo ao ar livre, olhando para longe."},
-    ]},
+    ],
+    "stories": "Funcionamento de fim de ano, sugerido para 16/12, antes do último sábado de atendimento (19/12).",
+    "stories_dra": "definir a data do recesso"},
    {"datas": "21 a 27/12", "tema": "Natal · agradecimento", "nota_sem": "Semana de festa: 2 conteúdos de feed.",
     "porque": ["Tema previsto para a gravação do fim de novembro.",
                "Fortalece a marca e a equipe: o cuidado da Clínica Modelo não depende de uma pessoa só."],
     "itens": [
       {"fmt": "Carrossel", "titulo": "2026 na Clínica Modelo", "plan": "2026-12-21", "st": "prop", "mat": "Texto a produzir", "nota": "Retrospectiva com os temas do ano, a equipe e os 30 anos de carreira da Dra. Adriana. Sem números que não possam ser confirmados."},
       {"fmt": "Reels", "titulo": "Agradecimento de Natal da equipe", "quem": "Equipe Clínica Modelo", "plan": "2026-12-23", "st": "prop", "mat": "A gravar", "nota": "Cada profissional diz uma frase curta; o vídeo fecha com a marca."},
-    ],
-    "stories": "Funcionamento de fim de ano, depois de confirmar os horários."},
+    ],},
    {"datas": "28/12 a 03/01", "tema": "Réveillon com segurança para os olhos", "nota_sem": "Semana de Ano Novo: 2 conteúdos de feed.",
     "porque": ["Orientação útil para a virada: rolhas de espumante e fogos de artifício podem machucar os olhos."],
     "itens": [
@@ -210,36 +211,36 @@ MESES = [
  },
  {
   "id": "janeiro", "nome": "Janeiro 2027", "tipo": "Proposta",
-  "intro": "Objetivo: retomar a sequência pedida pela Dra. com duas semanas de refrativa, cuidar do verão e publicar o material de retina e diabetes que ficou pendente em novembro.",
-  "resumo": "12 conteúdos de feed · 7 vídeos a gravar · 1 vídeo e 2 carrosséis já prontos · caixinhas em 06/01 e 20/01",
+  "intro": "Objetivo: abrir o ano com o check-up oftalmológico, seguir com as duas semanas de refrativa pedidas pela Dra. e publicar o material de retina e diabetes que ficou pendente em novembro.",
+  "resumo": "12 conteúdos de feed · 7 vídeos a gravar · 1 vídeo e 1 carrossel já prontos · caixinhas em 06/01 e 20/01",
   "aviso": None,
   "semanas": [
-   {"datas": "04 a 10/01", "tema": "Refrativa (1) · as formas de corrigir o grau",
-    "porque": ["Tema pedido pela Dra. na reunião de alinhamento, por duas semanas, e que ainda não foi abordado.",
-               "No começo do ano muita gente troca óculos e lentes e retoma as consultas."],
+   {"datas": "04 a 10/01", "tema": "Check-up · e o oftalmologista?",
+    "porque": ["No começo do ano muita gente organiza exames e consultas de rotina, e o oftalmologista costuma ficar de fora.",
+               "Abre caminho para as duas semanas seguintes: é na consulta que se descobre o grau e se avalia a correção."],
     "itens": [
-      {"fmt": "Reels", "titulo": "Óculos, lentes de contato ou cirurgia: quem define?", "quem": "Dra. Adriana + Dr. Alisson", "plan": "2027-01-04", "st": "prop", "mat": "A gravar"},
-      {"fmt": "Carrossel", "titulo": "Miopia, hipermetropia, astigmatismo e presbiopia", "plan": "2027-01-06", "st": "prop", "mat": "Texto a produzir", "nota": "Uma tela por condição, com palavras do dia a dia."},
-      {"fmt": "Reels", "titulo": "Lentes de contato: adaptação e cuidados", "quem": "Dra. Adriana + colega", "plan": "2027-01-08", "st": "prop", "mat": "A gravar"},
+      {"fmt": "Reels", "titulo": "Você faz check-up todo ano. E o oftalmologista?", "quem": "Dra. Adriana + colega", "plan": "2027-01-04", "st": "prop", "mat": "A gravar", "nota": "Muitas alterações dos olhos não dão sinal no início. A frequência das consultas depende da idade, do histórico e de doenças como diabetes."},
+      {"fmt": "Carrossel", "titulo": "Com que frequência ir ao oftalmologista?", "plan": "2027-01-06", "st": "prop", "mat": "Texto a produzir", "nota": "Por fase da vida: crianças, adultos, depois dos 40 (vista cansada), 60+, e quem tem diabetes, pressão alta ou histórico familiar de glaucoma. Validar os intervalos com a Dra. Adriana. Convite: “Saiba quando procurar avaliação”."},
+      {"fmt": "Reels", "titulo": "O que é avaliado em uma consulta de rotina", "quem": "Dra. Adriana + colega", "plan": "2027-01-08", "st": "prop", "mat": "A gravar", "nota": "Visão e grau, pressão do olho e fundo de olho. Nenhum exame isolado conclui, e pressão normal não exclui glaucoma."},
     ],
-    "stories": "Caixinha sobre grau e correção em 06/01, respostas em 07/01."},
-   {"datas": "11 a 17/01", "tema": "Refrativa (2) · cirurgia refrativa",
+    "stories": "Enquete “Quando foi sua última consulta com o oftalmologista?” em 04/01. Caixinha sobre check-up em 06/01, respostas em 07/01."},
+   {"datas": "11 a 17/01", "tema": "Refrativa (1) · as formas de corrigir o grau",
+    "porque": ["Tema pedido pela Dra. na reunião de alinhamento, por duas semanas, e que ainda não foi abordado.",
+               "No começo do ano muita gente troca óculos e lentes."],
+    "itens": [
+      {"fmt": "Reels", "titulo": "Óculos, lentes de contato ou cirurgia: quem define?", "quem": "Dra. Adriana + Dr. Alisson", "plan": "2027-01-11", "st": "prop", "mat": "A gravar"},
+      {"fmt": "Carrossel", "titulo": "Miopia, hipermetropia, astigmatismo e presbiopia", "plan": "2027-01-13", "st": "prop", "mat": "Texto a produzir", "nota": "Uma tela por condição, com palavras do dia a dia."},
+      {"fmt": "Reels", "titulo": "Lentes de contato: adaptação e cuidados", "quem": "Dra. Adriana + colega", "plan": "2027-01-15", "st": "prop", "mat": "A gravar"},
+    ]},
+   {"datas": "18 a 24/01", "tema": "Refrativa (2) · cirurgia refrativa",
     "porque": ["Segunda semana do tema, como a Dra. pediu.",
                "Fala de indicação e segurança, sem promessa de deixar os óculos."],
     "itens": [
-      {"fmt": "Reels", "titulo": "Cirurgia refrativa: a avaliação vem antes", "quem": "Dr. Alisson", "plan": "2027-01-11", "st": "prop", "mat": "A gravar"},
-      {"fmt": "Carrossel", "titulo": "Exames antes da cirurgia refrativa", "plan": "2027-01-13", "st": "prop", "mat": "Texto a produzir", "nota": "Topografia e tomografia de córnea, paquimetria e refração. Confirmar o equipamento antes de citar o Pentacam."},
-      {"fmt": "Reels", "titulo": "Depois da cirurgia refrativa: o que esperar", "quem": "Dr. Alisson + Dra. Adriana", "plan": "2027-01-15", "st": "prop", "mat": "A gravar", "nota": "A recuperação varia caso a caso."},
-    ]},
-   {"datas": "18 a 24/01", "tema": "Verão · olho vermelho e conjuntivite",
-    "porque": ["Auge do verão e de ambientes cheios.",
-               "Usa um carrossel que já está pronto desde abril."],
-    "itens": [
-      {"fmt": "Carrossel", "titulo": "3 lugares onde você pode pegar conjuntivite", "trello": "XHndrHyh", "plan": "2027-01-18", "st": "prop", "mat": "Pronto (revisar)"},
-      {"fmt": "Reels", "titulo": "Olho vermelho: alergia, conjuntivite ou olho seco?", "quem": "Dra. Adriana + colega", "plan": "2027-01-20", "st": "prop", "mat": "A gravar"},
-      {"fmt": "Reels", "titulo": "Conjuntivite: quando procurar o oftalmologista", "quem": "Dra. Adriana + colega", "plan": "2027-01-22", "st": "prop", "mat": "A gravar"},
+      {"fmt": "Reels", "titulo": "Cirurgia refrativa: a avaliação vem antes", "quem": "Dr. Alisson", "plan": "2027-01-18", "st": "prop", "mat": "A gravar"},
+      {"fmt": "Carrossel", "titulo": "Exames antes da cirurgia refrativa", "plan": "2027-01-20", "st": "prop", "mat": "Texto a produzir", "nota": "Topografia e tomografia de córnea, paquimetria e refração. Confirmar o equipamento antes de citar o Pentacam."},
+      {"fmt": "Reels", "titulo": "Depois da cirurgia refrativa: o que esperar", "quem": "Dr. Alisson + Dra. Adriana", "plan": "2027-01-22", "st": "prop", "mat": "A gravar", "nota": "A recuperação varia caso a caso."},
     ],
-    "stories": "Caixinha sobre olho vermelho em 20/01, respostas em 21/01."},
+    "stories": "Caixinha sobre cirurgia refrativa em 20/01, respostas em 21/01."},
    {"datas": "25 a 31/01", "tema": "Retina e diabetes · acompanhar mesmo sem sintomas",
     "porque": ["Retoma o tema de novembro que ficou sem gravação.",
                "Usa material pronto: o vídeo do OCT e o carrossel do diabetes, sem a referência à data."],
@@ -255,6 +256,7 @@ MESES = [
 BANCO = [
  ("Reels", "5 exames importantes para o glaucoma", "Dra. Adriana + Dr. Alisson", "Gravado", "Março de 2027, na Semana Mundial do Glaucoma", "", "1zdZ9M3ZuLjuLMu6HuPU0e24uT4_PA6Vo"),
  ("Carrossel", "Exames para diagnóstico e acompanhamento do glaucoma", "", "Em produção", "Março de 2027", "", ""),
+ ("Carrossel", "3 lugares onde você pode pegar conjuntivite", "", "Pronto (revisar)", "Fevereiro de 2027, antes do Carnaval", "Semana de olho vermelho e conjuntivite, com dois Reels a gravar na gravação seguinte. Saiu de janeiro para dar lugar ao check-up.", ""),
  ("Carrossel", "Exames para avaliação da retina", "", "Pronto", "Uma semana de retina ou de exames, a definir", "Adiado em novembro.", ""),
  ("Vídeos", "Apresentação da equipe (10 vídeos)", "Médicos e técnicos", "Gravados", "A combinar", "Sugestão: série nos stories e no destaque da equipe.", ""),
  ("Vídeo", "Vídeo para a TV da clínica", "", "Pronto", "Recepção", "", "1SHtd3n6uLSlE2DRdljDGSw7my3iJBXwj"),
@@ -272,12 +274,12 @@ GRAVACAO = [
    ("Feliz 2027", "Dra. Adriana + equipe"),
  ]),
  ("Janeiro", [
+   ("Check-up: e o oftalmologista?", "Dra. Adriana + colega"),
+   ("O que é avaliado em uma consulta de rotina", "Dra. Adriana + colega"),
    ("Óculos, lentes ou cirurgia: quem define?", "Dra. Adriana + Dr. Alisson"),
    ("Lentes de contato: adaptação e cuidados", "A definir"),
    ("Cirurgia refrativa: a avaliação vem antes", "Dr. Alisson"),
    ("Depois da cirurgia refrativa", "Dr. Alisson + Dra. Adriana"),
-   ("Olho vermelho: alergia, conjuntivite ou olho seco?", "A definir"),
-   ("Conjuntivite: quando procurar o oftalmologista", "A definir"),
    ("Retinopatia diabética sem sintomas", "Dra. Adriana + Dra. Jane"),
  ]),
 ]
@@ -305,6 +307,8 @@ def item_html(it, mes_id, wi, ii):
         linhas.append('<p class="datas">' + "".join(datas) + "</p>")
     if it.get("aprov"):
         linhas.append(f'<p class="aprov"><b>Aprovação</b> {E(it["aprov"])}</p>')
+    if it.get("dra"):
+        linhas.insert(0, f'<p class="dra"><b>Aguardando a Dra. Adriana</b> {E(it["dra"])}</p>')
     if it.get("nota"):
         linhas.append(f'<p class="nota">{E(it["nota"])}</p>')
     acoes = []
@@ -349,7 +353,7 @@ def item_html(it, mes_id, wi, ii):
             linhas.append(extras)
     cid = f"{mes_id}-s{wi+1}-c{ii+1}"
     dados = f' data-card="{it.get("trello","")}" data-titulo="{E(it["fmt"] + ": " + it["titulo"])}" data-pendente="{1 if st in ("prop","rev","prog") else 0}"' if SITE else ""
-    return f'''<article class="card st-{st}" id="{cid}" data-comment-target{dados}>
+    return f'''<article class="card st-{st}{" depende-dra" if it.get("dra") else ""}" id="{cid}" data-comment-target{dados}>
   <div class="card-top"><span class="fmt">{E(it["fmt"])}</span><span class="chips">{chip(st)}{extra}</span></div>
   <h4>{E(it["titulo"])}</h4>
   {"".join(linhas)}
@@ -372,6 +376,8 @@ def semana_html(s, mes_id, wi):
     nova = f'<span class="badge-nova">{E(s["nova"])}</span>' if s.get("nova") else ""
     notasem = f'<p class="notasem">{E(s["nota_sem"])}</p>' if s.get("nota_sem") else ""
     stories = f'<p class="stories"><b>Stories</b> {E(s["stories"])}</p>' if s.get("stories") else ""
+    if s.get("stories_dra"):
+        stories += f'<p class="dra"><b>Aguardando a Dra. Adriana</b> {E(s["stories_dra"])}</p>'
     if s.get("reman"):
         stories = f'<p class="stories"><b>Remanejado</b> {E(s["reman"])}</p>' + stories
     pend = [it for it in s["itens"] if it["st"] in ("prop", "rev", "prog") and not em_producao(it)]
@@ -400,6 +406,79 @@ def semana_html(s, mes_id, wi):
   </div>
 </details>'''
  
+CAL_MES = {"outubro": (2026, 10), "novembro": (2026, 11), "dezembro": (2026, 12), "janeiro": (2027, 1)}
+CAL_K = {"pub": "ok", "late": "ok", "prog": "info", "rev": "info", "prop": "prop", "adiado": "off", "nexec": "off", "reprov": "off", "noplan": "off"}
+ABREV = {"Reels": "R", "Carrossel": "C"}
+# (data, letra, descrição, alvo) · tudo aqui é "a confirmar"
+CAL_EXTRA = [
+    ("2026-11-27", "G", "Gravação: sugestão de data (27 ou 28/11), a confirmar", "gravacao"),
+    ("2026-11-28", "G", "Gravação: sugestão de data (27 ou 28/11), a confirmar", "gravacao"),
+    ("2026-12-16", "S", "Story: funcionamento de fim de ano. Aguardando a Dra. Adriana definir a data do recesso", "dezembro-s3"),
+]
+CAL_AVISO = {"2026-12-19": ("Últ. sáb.", "Último sábado de atendimento")}
+ 
+def cal_html(m):
+    ano, mes = CAL_MES[m["id"]]
+    por_dia = {}
+    for mm in MESES:
+        for wi, sem in enumerate(mm["semanas"]):
+            for ii, it in enumerate(sem["itens"]):
+                d = it.get("feito") or it.get("plan")
+                if not d:
+                    continue
+                x = dt.date.fromisoformat(d)
+                if (x.year, x.month) == (ano, mes):
+                    por_dia.setdefault(x, []).append((it, f"{mm['id']}-s{wi+1}-c{ii+1}"))
+    ini = dt.date(ano, mes, 1)
+    fim = (dt.date(ano + (mes == 12), mes % 12 + 1, 1) - dt.timedelta(days=1))
+    d = ini - dt.timedelta(days=ini.weekday())
+    ult = fim + dt.timedelta(days=6 - fim.weekday())
+    cel = "".join(f'<div class="cal-dow" aria-hidden="true">{x}</div>' for x in ["seg", "ter", "qua", "qui", "sex", "sáb", "dom"])
+    while d <= ult:
+        if d.month != mes:
+            cel += '<div class="cal-d fora" aria-hidden="true"></div>'
+        else:
+            posts = ""
+            for it, cid in por_dia.get(d, []):
+                k = CAL_K.get(it["st"], "prop")
+                lab = STATUS[it["st"]][0]
+                posts += (f'<button type="button" class="cal-p k-{k}{" p-dra" if it.get("dra") else ""}" data-alvo="{cid}" '
+                          f'aria-label="{E(it["fmt"])}: {E(it["titulo"])} ({E(lab)})" title="{E(it["fmt"])}: {E(it["titulo"])} · {E(lab)}">'
+                          f'<span class="cal-f">{ABREV.get(it["fmt"], it["fmt"][:1])}</span><span class="cal-t">{E(it["titulo"])}</span></button>')
+            for dia, letra, desc, alvo in CAL_EXTRA:
+                if dia == d.isoformat():
+                    posts += (f'<button type="button" class="cal-p k-conf{" p-dra" if "Dra. Adriana" in desc else ""}" data-alvo="{alvo}" aria-label="{E(desc)}" title="{E(desc)}">'
+                              f'<span class="cal-f">{letra}</span><span class="cal-t">{E(desc)}</span></button>')
+            aviso = ""
+            if d.isoformat() in CAL_AVISO:
+                curto, longo = CAL_AVISO[d.isoformat()]
+                aviso = f'<span class="cal-aviso" title="{E(longo)}"><span class="curto">{E(curto)}</span><span class="longo">{E(longo)}</span></span>'
+            cel += f'<div class="cal-d{" tem-aviso" if aviso else ""}" data-dia="{d.isoformat()}"><span class="cal-n">{d.day}</span>{aviso}{posts}</div>'
+        d += dt.timedelta(days=1)
+    prefixo = f"{ano}-{mes:02d}-"
+    letras = {l for dia, l, _, _ in CAL_EXTRA if dia.startswith(prefixo)}
+    extra_leg = ""
+    if "S" in letras:
+        extra_leg += '<span><b>S</b> Story</span>'
+    if "G" in letras:
+        extra_leg += '<span><b>G</b> Gravação</span>'
+    if letras:
+        extra_leg += '<span><i class="k-conf"></i>A confirmar</span>'
+    if any(it.get("dra") and (it.get("feito") or it.get("plan") or "").startswith(prefixo) for mm in MESES for se in mm["semanas"] for it in se["itens"]) or any(dia.startswith(prefixo) and "Dra. Adriana" in desc for dia, _, desc, _ in CAL_EXTRA):
+        extra_leg += '<span><i class="leg-dra"></i>Aguardando a Dra. Adriana</span>'
+    for dia, (curto, longo) in CAL_AVISO.items():
+        if dia.startswith(prefixo):
+            extra_leg += f'<span><b class="aviso-leg">{E(curto)}</b> {E(longo)} ({int(dia[-2:]):02d}/{mes:02d})</span>'
+    leg = ('<div class="cal-leg"><span><b>R</b> Reels</span><span><b>C</b> Carrossel</span>' + extra_leg +
+           '<span><i class="k-ok"></i>Publicado</span><span><i class="k-info"></i>Programado ou em revisão</span>'
+           '<span><i class="k-prop"></i>Proposta</span><span><i class="k-off"></i>Não saiu</span></div>')
+    return f'''<div class="cal">
+  <h3>Resumo do mês</h3>
+  <p class="cal-dica">Toque em um post para ir até ele.</p>
+  <div class="cal-grid">{cel}</div>
+  {leg}
+</div>'''
+ 
 def seguir_html(m):
     i = next(k for k, x in enumerate(MESES) if x["id"] == m["id"])
     ant = MESES[i - 1] if i > 0 else None
@@ -423,6 +502,7 @@ def mes_html(m):
   </div>
   {sem}
   {reman}
+  {cal_html(m)}
   {seguir_html(m)}
 </section>'''
  
@@ -453,7 +533,7 @@ def banco_html():
   {"".join(linhas)}
   <button class="cmt" type="button" hidden>Comentar</button>
 </article>'''
-    return f'''<section class="mes fixa" id="banco">
+    return f'''<section class="mes" id="banco">
   <div class="mes-head"><span class="tipo">Material pronto ou em andamento</span><h2>Banco de vídeos e posts</h2>
   <p class="intro">O que está gravado ou produzido e ainda não tem semana, com a sugestão de quando entra.</p></div>
   <div class="grid">{cards}</div>
@@ -484,7 +564,7 @@ def grav_html():
   {'<p class="nota">As ideias enviadas entram como comentário no card “Ideias de vídeos — Dra. Adriana”, no Trello da AGE.</p>' if SITE else '<div class="enviadas"><h4>Ideias enviadas</h4><ul id="lista-ideias"><li class="vazio">Carregando…</li></ul></div>'}
 </div>'''
     return f'''<section class="mes fixa" id="gravacao">
-  <div class="mes-head"><span class="tipo">Fim de novembro · data a confirmar</span><h2>Próxima gravação</h2>
+  <div class="mes-head"><span class="tipo">Sugestão: 27 ou 28 de novembro · a confirmar</span><h2>Próxima gravação</h2>
   <p class="intro">{n} vídeos para dezembro e janeiro, definidos antes da gravação para que cada um já tenha semana e sequência. Se o dia não comportar todos, a prioridade é dezembro; parte de janeiro pode sair em formato mais simples.</p></div>
   <p class="lbl sug">Sugestões da equipe AGE</p>
   <div class="gwrap">{blocos}</div>
@@ -492,6 +572,21 @@ def grav_html():
 </section>'''
  
 nav = "".join(f'<a href="#{m["id"]}">{E(m["nome"].split()[0])}</a>' for m in MESES)
+def pend_dra_html():
+    linhas = []
+    for mm in MESES:
+        for wi, se in enumerate(mm["semanas"]):
+            for ii, it in enumerate(se["itens"]):
+                if it.get("dra"):
+                    quando = fd(it.get("plan")) if it.get("plan") else ""
+                    linhas.append((it.get("plan") or "", f'{it["fmt"]} · {it["titulo"]}', quando, it["dra"], f'{mm["id"]}-s{wi+1}-c{ii+1}'))
+            if se.get("stories_dra"):
+                linhas.append(("2026-12-16" if mm["id"] == "dezembro" else "", "Story · Funcionamento de fim de ano", "sugerido para " + se["stories"].split("sugerido para ")[1].split(",")[0] if "sugerido para " in se["stories"] else se["datas"], se["stories_dra"], f'{mm["id"]}-s{wi+1}'))
+    if not linhas:
+        return ""
+    lis = "".join(f'<li><button type="button" class="js-ir" data-alvo="{alvo}"><span class="pd-o">{E(o)}</span><span class="pd-t">{E(t)}{" · " + E(q) if q else ""}</span></button></li>' for _, t, q, o, alvo in sorted(linhas))
+    return f'<div class="pend-dra" role="note"><p class="pd-tit">Aguardando a Dra. Adriana</p><ul>{lis}</ul></div>'
+ 
 legenda = "".join(chip(k) for k in ["pub","prog","rev","adiado","reprov","nexec","prop"]) + '<span class="chip m-ready">Gravado / pronto</span><span class="chip m-todo">A gravar / a produzir</span>'
  
 CLAUDE_JS = ""  # a versão do Claude (artifact) não é gerada neste repositório
@@ -551,6 +646,57 @@ nav.meses a:hover, nav.meses a:focus-visible {{ background: var(--areia); outlin
 nav.meses a[aria-current="page"] {{ background: var(--marrom); color: #fff; }}
 .js .mes {{ display: none; }}
 .js .mes.ativo, .js .mes.fixa {{ display: block; }}
+.atalhos {{ margin: 10px 0 4px; }}
+.nav-banco {{ display: inline-flex; align-items: center; font: 600 .95rem var(--texto); color: var(--marrom); text-decoration: none; border: 1px solid var(--marrom); border-radius: 999px; padding: 6px 16px; }}
+.nav-banco:hover {{ background: var(--areia); }}
+.nav-banco:focus-visible {{ outline: 2px solid var(--marrom); outline-offset: 2px; }}
+.nav-banco[aria-current="page"] {{ background: var(--marrom); color: #fff; }}
+.cal {{ background: var(--papel); border-radius: 10px; padding: 16px 18px; margin: 16px 0 0; }}
+.cal h3 {{ font-family: var(--display); color: var(--marrom); font-size: 1.4rem; margin: 0; }}
+.cal-dica {{ margin: 2px 0 12px; font-size: .85rem; color: var(--cinza); }}
+.cal-grid {{ display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; }}
+.cal-dow {{ font-size: .72rem; text-transform: uppercase; letter-spacing: .04em; color: var(--cinza); text-align: center; padding-bottom: 2px; }}
+.cal-d {{ min-height: 54px; border: 1px solid #ECE7DF; border-radius: 6px; padding: 3px; display: flex; flex-direction: column; gap: 3px; min-width: 0; }}
+.cal-d.fora {{ border-color: transparent; }}
+.cal-n {{ font-size: .75rem; color: var(--cinza); font-variant-numeric: tabular-nums; line-height: 1.2; }}
+.cal-d.hoje {{ border: 2px solid var(--marrom); }}
+.cal-d.hoje .cal-n {{ color: var(--marrom); font-weight: 700; }}
+.cal-p {{ display: flex; gap: 4px; align-items: flex-start; width: 100%; border: 0; border-radius: 4px; padding: 3px 4px; font: 700 .74rem var(--texto); cursor: pointer; text-align: left; line-height: 1.2; }}
+.cal-p:focus-visible {{ outline: 2px solid var(--marrom); outline-offset: 1px; }}
+.k-ok {{ background: #E5EDE2; color: var(--ok); }}
+.k-info {{ background: #E2E9EF; color: var(--info); }}
+.k-prop {{ background: var(--marrom); color: #fff; }}
+.dra {{ margin: 2px 0; padding: 6px 10px; border-radius: 6px; background: #F4E1DC; color: var(--bad); border-left: 3px solid var(--bad); font-size: .88rem; }}
+.dra b {{ display: block; font-size: .72rem; text-transform: uppercase; letter-spacing: .04em; }}
+article.card.depende-dra {{ border-top-color: var(--bad); border-color: #EBCFC7; border-top-width: 4px; border-top-color: var(--bad); }}
+.cal-p.p-dra {{ box-shadow: 0 0 0 2px var(--bad); }}
+.leg-dra {{ background: #fff; box-shadow: 0 0 0 2px var(--bad); }}
+.pend-dra {{ margin: 12px 0; padding: 12px 16px; border-radius: 10px; background: #F4E1DC; border-left: 4px solid var(--bad); }}
+.pd-tit {{ margin: 0 0 6px; color: var(--bad); font-weight: 700; font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; }}
+.pend-dra ul {{ margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; }}
+.js-ir {{ all: unset; cursor: pointer; display: flex; flex-wrap: wrap; gap: 2px 8px; color: var(--tinta); font-size: .92rem; }}
+.js-ir .pd-o {{ font-weight: 700; color: var(--bad); }}
+.js-ir .pd-o::first-letter {{ text-transform: uppercase; }}
+.js-ir .pd-t {{ text-decoration: underline; text-decoration-color: #D8B2A7; text-underline-offset: 3px; }}
+.js-ir:focus-visible {{ outline: 2px solid var(--bad); outline-offset: 2px; border-radius: 4px; }}
+.k-conf {{ background: #fff; color: var(--marrom); border: 1px dashed var(--marrom); }}
+.cal-aviso {{ font-size: .62rem; font-weight: 700; text-transform: uppercase; letter-spacing: .02em; color: var(--bad); line-height: 1.1; }}
+.cal-aviso .longo {{ display: none; }}
+.cal-d.tem-aviso {{ background: #FBF3F0; border-color: #EBCFC7; }}
+.aviso-leg {{ color: var(--bad) !important; font-size: .72rem; text-transform: uppercase; }}
+.k-off {{ background: #EEEAE4; color: var(--cinza); text-decoration: line-through; }}
+.cal-t {{ display: none; font-weight: 500; }}
+.cal-leg {{ display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 12px; font-size: .8rem; color: var(--cinza); }}
+.cal-leg span {{ display: inline-flex; align-items: center; gap: 5px; }}
+.cal-leg b {{ color: var(--tinta); }}
+.cal-leg i {{ width: 12px; height: 12px; border-radius: 3px; display: inline-block; text-decoration: none; }}
+.destaque {{ outline: 3px solid var(--bege); outline-offset: 3px; }}
+@media (min-width: 760px) {{
+  .cal-d {{ min-height: 86px; }}
+  .cal-aviso .curto {{ display: none; }}
+  .cal-aviso .longo {{ display: inline; }}
+  .cal-t {{ display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }}
+}}
 .seguir {{ display: flex; justify-content: space-between; gap: 12px; margin: 20px 0 4px; }}
 .seguir .seg {{ font: 600 .95rem var(--texto); color: var(--marrom); text-decoration: none; background: var(--areia); border-radius: 999px; padding: 10px 18px; }}
 .seguir .seg.prox {{ background: var(--marrom); color: #fff; margin-left: auto; }}
@@ -720,7 +866,9 @@ footer .ass {{ color: var(--tinta); }}
   </header>
   {'<div class="quem-sou"><label for="meu-nome">Comentários e aprovações enviados em nome de</label><input id="meu-nome" type="text" maxlength="80" value="Dra. Adriana"></div>' if SITE else ''}
   <nav class="meses" aria-label="Meses">{nav}</nav>
+  <div class="atalhos"><a class="nav-banco" href="#banco">Banco de vídeos e posts</a></div>
   <div class="legenda"><b>Legenda</b>{legenda}</div>
+  {pend_dra_html()}
   {"".join(mes_html(m) for m in MESES)}
   {banco_html()}
   {grav_html()}
@@ -740,12 +888,13 @@ footer .ass {{ color: var(--tinta); }}
     const h = location.hash.slice(1);
     const id = vistas.includes(h) ? h : inicial;
     document.querySelectorAll("section.mes:not(.fixa)").forEach(s => s.classList.toggle("ativo", s.id === id));
-    document.querySelectorAll("nav.meses a").forEach(a => {{
+    document.querySelectorAll("nav.meses a, a.nav-banco").forEach(a => {{
       if (a.getAttribute("href") === "#" + id) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
     }});
+    legenda.classList.toggle("oculta", id === "banco");
     if (rolar) document.querySelector("nav.meses").scrollIntoView({{ block: "start" }});
   }}
-  document.querySelectorAll("nav.meses a, nav.seguir a").forEach(a => a.addEventListener("click", e => {{
+  document.querySelectorAll("nav.meses a, nav.seguir a, a.nav-banco").forEach(a => a.addEventListener("click", e => {{
     e.preventDefault();
     const alvo = a.getAttribute("href");
     if (location.hash !== alvo) location.hash = alvo; else mostrar(true);
@@ -754,6 +903,18 @@ footer .ass {{ color: var(--tinta); }}
   const t = new Date();
   const hoje = t.getFullYear() + "-" + String(t.getMonth() + 1).padStart(2, "0") + "-" + String(t.getDate()).padStart(2, "0");
   document.querySelectorAll("details.semana[data-fim]").forEach(d => {{ if (d.dataset.fim < hoje) d.open = false; }});
+  document.querySelectorAll('.cal-d[data-dia="' + hoje + '"]').forEach(c => c.classList.add("hoje"));
+  document.querySelectorAll(".cal-p, .js-ir").forEach(b => b.addEventListener("click", () => {{
+    const alvo = document.getElementById(b.dataset.alvo);
+    if (!alvo) return;
+    const sec = alvo.closest("section.mes");
+    if (sec && !sec.classList.contains("ativo") && !sec.classList.contains("fixa")) {{ history.replaceState(null, "", "#" + sec.id); mostrar(false); }}
+    const det = alvo.closest("details");
+    if (det) det.open = true;
+    alvo.scrollIntoView({{ block: "center", behavior: "smooth" }});
+    alvo.classList.add("destaque");
+    setTimeout(() => alvo.classList.remove("destaque"), 1800);
+  }}));
   mostrar(false);
 }})();
 {SCRIPT_FINAL}</script>
