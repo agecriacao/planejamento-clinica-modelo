@@ -72,7 +72,7 @@
       if (!d) return;
       if (card.querySelector(".galeria")) montarGaleria(card, d.imagens || []);
       const bv = card.querySelector(".js-video");
-      if (bv && !bv.dataset.video && d.video) { bv.dataset.video = d.video; bv.hidden = false; }
+           if (bv && !bv.dataset.video && d.video && (card.dataset.titulo || "").startsWith("Reels")) { bv.dataset.video = d.video; bv.hidden = false; }
     }).catch(() => {});
   }
 
