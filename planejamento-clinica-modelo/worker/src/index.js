@@ -8,6 +8,7 @@
 //   POST /ideia                    -> {tema, prof, obs, nome}  (comentário no card de ideias)
 //   GET  /buscar?q=título          -> procura no quadro o card de um post pelo título
 //   GET  /painel                   -> todos os cards das listas de produção, com data, etapa, vídeo e legenda
+//   GET  /video/:idDrive           -> o vídeo do Drive para o player do celular (só links que estão em cards do quadro)
  
 const API = "https://api.trello.com/1";
  
@@ -18,7 +19,8 @@ function cors(env, req) {
   return {
     "Access-Control-Allow-Origin": ok ? (origem || "*") : permitido[0],
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Headers": "Content-Type, Range",
+    "Access-Control-Expose-Headers": "Content-Length, Content-Range, Accept-Ranges",
     "Vary": "Origin",
   };
 }
@@ -228,6 +230,40 @@ async function rotaPainel(req, env, ctx) {
   return json(dados, 200, env, req, { "Cache-Control": "public, max-age=60" });
 }
  
+// ---------------------------------------------------------------- vídeo
+async function idsDeVideo(env, ctx) {
+  const cache = caches.default;
+  const chave = new Request(`https://cache.local/videos/${env.BOARD_ID}`);
+  const salvo = await cache.match(chave);
+  if (salvo) return new Set(await salvo.json());
+  const r = await fetch(`${API}/boards/${env.BOARD_ID}/cards/open?fields=desc&${auth(env)}`);
+  if (!r.ok) return new Set();
+  const ids = new Set();
+  for (const c of await r.json()) {
+    for (const m of String(c.desc || "").matchAll(/drive\.google\.com\/file\/d\/([A-Za-z0-9_-]{20,})/g)) ids.add(m[1]);
+  }
+  ctx.waitUntil(cache.put(chave, new Response(JSON.stringify([...ids]), { headers: { "Cache-Control": "max-age=600" } })));
+  return ids;
+}
+ 
+async function rotaVideo(req, env, ctx, id) {
+  const base = cors(env, req);
+  if (!/^[A-Za-z0-9_-]{20,}$/.test(id)) return new Response("link inválido", { status: 400, headers: base });
+  if (!(await idsDeVideo(env, ctx)).has(id)) return new Response("vídeo não está em nenhum card do quadro", { status: 404, headers: base });
+  const pedido = {};
+  const faixa = req.headers.get("Range");
+  if (faixa) pedido.Range = faixa;
+  const r = await fetch(`https://drive.usercontent.google.com/download?id=${encodeURIComponent(id)}&export=download&confirm=t`, { headers: pedido, redirect: "follow" });
+  const tipo = r.headers.get("Content-Type") || "";
+  if (!r.ok || tipo.startsWith("text/html")) return new Response("vídeo indisponível", { status: 502, headers: base });
+  const cab = new Headers(base);
+  cab.set("Content-Type", tipo.startsWith("video/") ? tipo : "video/mp4");
+  cab.set("Accept-Ranges", "bytes");
+  cab.set("Cache-Control", "public, max-age=3600");
+  for (const k of ["Content-Length", "Content-Range"]) { const v = r.headers.get(k); if (v) cab.set(k, v); }
+  return new Response(r.body, { status: r.status, headers: cab });
+}
+ 
 export default {
   async fetch(req, env, ctx) {
     if (req.method === "OPTIONS") return new Response(null, { headers: cors(env, req) });
@@ -239,6 +275,7 @@ export default {
       if (req.method === "POST" && p[0] === "ideia") return await rotaIdeia(req, env);
       if (req.method === "GET" && p[0] === "buscar") return await rotaBuscar(req, env, ctx);
       if (req.method === "GET" && p[0] === "painel") return await rotaPainel(req, env, ctx);
+      if (req.method === "GET" && p[0] === "video" && p[1]) return await rotaVideo(req, env, ctx, p[1]);
       return json({ ok: true, servico: "planejamento-clinica-modelo" }, 200, env, req);
     } catch (e) {
       return json({ erro: "falha inesperada" }, 500, env, req);
