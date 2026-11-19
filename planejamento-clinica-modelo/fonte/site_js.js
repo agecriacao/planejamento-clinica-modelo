@@ -4,9 +4,9 @@
   try { const n = localStorage.getItem("planejamento-nome"); if (n) nomeEl.value = n; } catch (e) {}
   nomeEl.addEventListener("change", () => { try { localStorage.setItem("planejamento-nome", nomeEl.value.trim()); } catch (e) {} });
   const nome = () => nomeEl.value.trim() || "Dra. Adriana";
-
+ 
   const avisar = (el, texto, erro) => { if (!el) return; el.textContent = texto; el.classList.toggle("erro", !!erro); };
-
+ 
   async function enviar(rota, corpo) {
     if (!API) throw new Error("A página ainda não está ligada ao Trello.");
     const r = await fetch(API + rota, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(corpo) });
@@ -14,24 +14,37 @@
     if (!r.ok) throw new Error(j.erro || "Não foi possível enviar agora.");
     return j;
   }
-
-  // Vídeo dentro do card (player do Google Drive)
-  function abrirVideo(card, id) {
-    const player = card.querySelector(".player");
-    if (!player.hidden) { player.hidden = true; player.innerHTML = ""; return; }
+ 
+  // Vídeo em janela centralizada (player do Google Drive)
+  const modal = document.getElementById("video-modal");
+  const vmPlayer = modal && modal.querySelector(".vm-player");
+  const vmTitulo = modal && modal.querySelector(".vm-titulo");
+  function fecharVideo() { if (modal.open) modal.close(); }
+  function abrirVideo(id, titulo) {
+    vmPlayer.innerHTML = "";
     const f = document.createElement("iframe");
     f.src = "https://drive.google.com/file/d/" + encodeURIComponent(id) + "/preview";
     f.allow = "autoplay; fullscreen";
     f.allowFullscreen = true;
-    f.title = "Vídeo: " + card.dataset.titulo;
-    player.appendChild(f);
-    player.hidden = false;
+    f.title = "Vídeo: " + titulo;
+    vmPlayer.appendChild(f);
+    vmTitulo.textContent = titulo.replace(/^[^:]+:\s*/, "");
+    modal.showModal();
+    modal.querySelector(".vm-fechar").focus();
+  }
+  if (modal) {
+    modal.querySelector(".vm-fechar").addEventListener("click", fecharVideo);
+    // Clique fora do vídeo fecha
+    modal.addEventListener("click", e => { if (!e.target.closest(".vm-top, .vm-player")) fecharVideo(); });
+    // Ao fechar, para o vídeo
+    modal.addEventListener("close", () => { vmPlayer.innerHTML = ""; });
   }
   document.querySelectorAll(".js-video").forEach(b => b.addEventListener("click", () => {
-    const card = b.closest("article.card");
-    if (b.dataset.video) abrirVideo(card, b.dataset.video);
+    if (!b.dataset.video || !modal) return;
+    const alvo = b.closest("[data-titulo]");
+    abrirVideo(b.dataset.video, b.dataset.titulo || (alvo && alvo.dataset.titulo) || "");
   }));
-
+ 
   // Galeria do carrossel a partir dos anexos do card no Trello
   function montarGaleria(card, imagens) {
     const g = card.querySelector(".galeria");
@@ -65,17 +78,17 @@
     const apr = card.querySelector(".js-aprovar");
     if (apr) apr.hidden = false;
   }
-
+ 
   function carregarCard(card) {
     const id = card.dataset.card;
     return fetch(API + "/card/" + encodeURIComponent(id)).then(r => r.ok ? r.json() : null).then(d => {
       if (!d) return;
       if (card.querySelector(".galeria")) montarGaleria(card, d.imagens || []);
       const bv = card.querySelector(".js-video");
-           if (bv && !bv.dataset.video && d.video && (card.dataset.titulo || "").startsWith("Reels")) { bv.dataset.video = d.video; bv.hidden = false; }
+      if (bv && !bv.dataset.video && d.video && (card.dataset.titulo || "").startsWith("Reels")) { bv.dataset.video = d.video; bv.hidden = false; }
     }).catch(() => {});
   }
-
+ 
   function ligarCard(card, id) {
     card.dataset.card = id;
     const c = card.querySelector(".js-comentar");
@@ -84,7 +97,7 @@
     if (a && !card.querySelector(".btn-prod")) a.hidden = false;
     return carregarCard(card);
   }
-
+ 
   if (API) {
     document.querySelectorAll("article.card").forEach(card => {
       if (card.dataset.card) { carregarCard(card); return; }
@@ -99,7 +112,7 @@
       }).catch(() => {});
     });
   }
-
+ 
   // Aprovar um conteúdo
   document.querySelectorAll(".js-aprovar").forEach(b => b.addEventListener("click", async () => {
     const card = b.closest("article.card");
@@ -110,7 +123,7 @@
       b.textContent = "✓ Aprovado"; avisar(ret, "Aprovação registrada no Trello.");
     } catch (e) { b.disabled = false; avisar(ret, e.message, true); }
   }));
-
+ 
   // Comentar um conteúdo
   document.querySelectorAll(".js-comentar").forEach(b => b.addEventListener("click", () => {
     const card = b.closest("article.card");
@@ -136,7 +149,7 @@
       btn.disabled = false;
     });
   });
-
+ 
   // Aprovar a semana inteira
   document.querySelectorAll(".js-aprovar-semana").forEach(b => b.addEventListener("click", async () => {
     const semana = b.closest("details.semana");
@@ -156,7 +169,7 @@
     if (erro) { b.disabled = false; avisar(ret, ok + " aprovado(s). " + erro, true); }
     else { b.textContent = "✓ Semana aprovada"; avisar(ret, "Aprovações registradas no Trello."); }
   }));
-
+ 
   // Ideias para a gravação
   const form = document.getElementById("form-ideias");
   const linhas = document.getElementById("linhas");
@@ -192,3 +205,4 @@
     avisar(msg, ok === 1 ? "Ideia enviada ao Trello. Obrigada!" : ok + " ideias enviadas ao Trello. Obrigada!");
   });
 })();
+ 
