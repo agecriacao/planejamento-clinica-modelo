@@ -172,7 +172,7 @@ MESES = [
     "itens": [
       {"fmt": "Reels", "titulo": "Caso de blefaroplastia que não deu certo", "quem": "Dra. Adriana + Dr. João Victor", "plan": "2026-11-30", "st": "prop", "mat": "Em edição", "dra": "enviar a imagem do paciente", "nota": "Já gravado. Falta a foto do paciente, que a Dra. Adriana vai enviar. Para publicar, é preciso a autorização por escrito do paciente para uso da imagem."},
       {"fmt": "Carrossel", "titulo": "Antes da blefaroplastia: o que é avaliado", "plan": "2026-12-02", "st": "prop", "mat": "Texto a produzir", "nota": "Pálpebra e campo visual, saúde da superfície do olho (olho seco), expectativas, e o pós-operatório, que varia caso a caso. Validar com o Dr. João Victor."},
-      {"fmt": "Reels", "titulo": "Respostas da caixinha: dúvidas sobre blefaroplastia", "quem": "Dr. João Victor", "plan": "2026-12-04", "st": "prop", "mat": "A gravar", "nota": "Perguntas reais da caixinha. Se a gravação for antes, usar dúvidas frequentes do consultório."},
+      {"fmt": "Reels", "titulo": "Respostas da caixinha: dúvidas sobre blefaroplastia", "quem": "Dra. Adriana + Dr. João Victor", "plan": "2026-12-04", "st": "prop", "mat": "A gravar", "nota": "Perguntas reais da caixinha. Se a gravação for antes, usar dúvidas frequentes do consultório."},
     ]},
    {"datas": "07 a 13/12", "tema": "Curiosidades sobre os olhos",
     "porque": ["Tema proposto pela AGE e aceito pela Dra.",
@@ -190,7 +190,7 @@ MESES = [
     "itens": [
       {"fmt": "Reels", "titulo": "Sol, piscina e mar: o que muda para os olhos nas férias", "quem": "Dra. Adriana + colega", "plan": "2026-12-14", "st": "prop", "mat": "A gravar"},
       {"fmt": "Carrossel", "titulo": "Checklist dos olhos para as férias", "plan": "2026-12-16", "st": "prop", "mat": "Texto a produzir", "nota": "Óculos de sol com proteção UV · lente de contato longe da piscina e do mar · protetor solar sem irritar os olhos · colírios de uso contínuo na mala · consulta antes de viajar para quem faz acompanhamento."},
-      {"fmt": "Reels", "titulo": "Férias das crianças: as telas não precisam ser vilãs", "quem": "Dra. Renata ou Dra. Natalia", "plan": "2026-12-18", "st": "prop", "mat": "A gravar", "nota": "Mais tempo ao ar livre, olhando para longe."},
+      {"fmt": "Reels", "titulo": "Férias das crianças: as telas não precisam ser vilãs", "quem": "Dra. Adriana + Dra. Renata ou Dra. Natalia", "plan": "2026-12-18", "st": "prop", "mat": "A gravar", "nota": "Mais tempo ao ar livre, olhando para longe."},
     ],
     "stories": "Funcionamento de fim de ano, sugerido para 16/12, antes do último sábado de atendimento (19/12).",
     "stories_dra": "definir a data do recesso"},
@@ -199,7 +199,7 @@ MESES = [
                "Fortalece a marca e a equipe: o cuidado da Clínica Modelo não depende de uma pessoa só."],
     "itens": [
       {"fmt": "Carrossel", "titulo": "2026 na Clínica Modelo", "plan": "2026-12-21", "st": "prop", "mat": "Texto a produzir", "nota": "Retrospectiva com os temas do ano, a equipe e os 30 anos de carreira da Dra. Adriana. Sem números que não possam ser confirmados."},
-      {"fmt": "Reels", "titulo": "Agradecimento de Natal da equipe", "quem": "Equipe Clínica Modelo", "plan": "2026-12-23", "st": "prop", "mat": "A gravar", "nota": "Cada profissional diz uma frase curta; o vídeo fecha com a marca."},
+      {"fmt": "Reels", "titulo": "Agradecimento de Natal da equipe", "quem": "Dra. Adriana + equipe", "plan": "2026-12-23", "st": "prop", "mat": "A gravar", "nota": "Cada profissional diz uma frase curta; o vídeo fecha com a marca."},
     ],},
    {"datas": "28/12 a 03/01", "tema": "Réveillon com segurança para os olhos", "nota_sem": "Semana de Ano Novo: 2 conteúdos de feed.",
     "porque": ["Orientação útil para a virada: rolhas de espumante e fogos de artifício podem machucar os olhos."],
@@ -236,7 +236,7 @@ MESES = [
     "porque": ["Segunda semana do tema, como a Dra. pediu.",
                "Fala de indicação e segurança, sem promessa de deixar os óculos."],
     "itens": [
-      {"fmt": "Reels", "titulo": "Cirurgia refrativa: a avaliação vem antes", "quem": "Dr. Alisson", "plan": "2027-01-18", "st": "prop", "mat": "A gravar"},
+      {"fmt": "Reels", "titulo": "Cirurgia refrativa: a avaliação vem antes", "quem": "Dra. Adriana + Dr. Alisson", "plan": "2027-01-18", "st": "prop", "mat": "A gravar"},
       {"fmt": "Carrossel", "titulo": "Exames antes da cirurgia refrativa", "plan": "2027-01-20", "st": "prop", "mat": "Texto a produzir", "nota": "Topografia e tomografia de córnea, paquimetria e refração. Confirmar o equipamento antes de citar o Pentacam."},
       {"fmt": "Reels", "titulo": "Depois da cirurgia refrativa: o que esperar", "quem": "Dr. Alisson + Dra. Adriana", "plan": "2027-01-22", "st": "prop", "mat": "A gravar", "nota": "A recuperação varia caso a caso."},
     ],
@@ -273,22 +273,22 @@ BANCO = [
  
 GRAVACAO = [
  ("Dezembro", [
-   ("Respostas sobre blefaroplastia", "Dr. João Victor"),
-   ("Você tem um ponto cego em cada olho", "Dra. Adriana + colega"),
-   ("Verdade ou mito? Curiosidades", "Dra. Adriana + colega"),
-   ("Sol, piscina e mar nas férias", "Dra. Adriana + colega"),
-   ("Férias das crianças e telas", "Dra. Renata ou Dra. Natalia"),
-   ("Agradecimento de Natal", "Equipe"),
-   ("Feliz 2027", "Dra. Adriana + equipe"),
+   ("Respostas sobre blefaroplastia", "Dra. Adriana + Dr. João Victor", "uSSCl3vR"),
+   ("Você tem um ponto cego em cada olho", "Dra. Adriana + colega", "exEJ5WNZ"),
+   ("Verdade ou mito? Curiosidades", "Dra. Adriana + colega", "0i2DELEp"),
+   ("Sol, piscina e mar nas férias", "Dra. Adriana + colega", "YS2qQXNH"),
+   ("Férias das crianças e telas", "Dra. Adriana + Dra. Renata ou Dra. Natalia", "ZqbRq2UL"),
+   ("Agradecimento de Natal", "Dra. Adriana + equipe", "UkWPMoLu"),
+   ("Feliz 2027", "Dra. Adriana + equipe", "JHknEVpH"),
  ]),
  ("Janeiro", [
-   ("Check-up: e o oftalmologista?", "Dra. Adriana + colega"),
-   ("O que é avaliado em uma consulta de rotina", "Dra. Adriana + colega"),
-   ("Óculos, lentes ou cirurgia: quem define?", "Dra. Adriana + Dr. Alisson"),
-   ("Lentes de contato: adaptação e cuidados", "A definir"),
-   ("Cirurgia refrativa: a avaliação vem antes", "Dr. Alisson"),
-   ("Depois da cirurgia refrativa", "Dr. Alisson + Dra. Adriana"),
-   ("Retinopatia diabética sem sintomas", "Dra. Adriana + Dra. Jane"),
+   ("Check-up: e o oftalmologista?", "Dra. Adriana + colega", "6hvyU7Z7"),
+   ("O que é avaliado em uma consulta de rotina", "Dra. Adriana + colega", "zsngbwr3"),
+   ("Óculos, lentes ou cirurgia: quem define?", "Dra. Adriana + Dr. Alisson", "mtssgj8v"),
+   ("Lentes de contato: adaptação e cuidados", "Dra. Adriana + colega", "eYImQf81"),
+   ("Cirurgia refrativa: a avaliação vem antes", "Dra. Adriana + Dr. Alisson", "e9ihU4Ei"),
+   ("Depois da cirurgia refrativa", "Dra. Adriana + Dr. Alisson", "T9DytgQS"),
+   ("Retinopatia diabética sem sintomas", "Dra. Adriana + Dra. Jane", "NVm3aYA7"),
  ]),
 ]
  
@@ -565,9 +565,19 @@ def grav_html():
     n = 0
     for mes, lst in GRAVACAO:
         lis = ""
-        for t, q in lst:
+        for t, q, card in lst:
             n += 1
-            lis += f'<li data-comment-target><span class="num">{n:02d}</span><span class="gt">{E(t)}</span><span class="quem">{E(q)}</span></li>'
+            acoes = ""
+            if SITE:
+                acoes = ('<div class="gacoes">'
+                         '<button type="button" class="gbtn js-ideia" data-voto="ok" aria-pressed="false">👍 Gostei</button>'
+                         '<button type="button" class="gbtn js-ideia" data-voto="nao" aria-pressed="false">👎 Prefiro não</button>'
+                         '<button type="button" class="gbtn js-ideia-mudar">✏️ Sugerir mudança</button></div>'
+                         '<form class="form-mudar" hidden><label>O que a senhora mudaria? Tema, quem participa…<textarea rows="2" maxlength="1000"></textarea></label>'
+                         '<div class="acoes-card"><button type="submit" class="btn-ver">Enviar</button><button type="button" class="btn-sec js-cancelar-mudar">Cancelar</button></div></form>'
+                         '<p class="retorno" role="status"></p>')
+            lis += (f'<li class="gsug" data-card="{card}" data-titulo="Gravação: {E(t)}" data-comment-target>'
+                    f'<span class="num">{n:02d}</span><span class="gt">{E(t)}</span><span class="quem">{E(q)}</span>{acoes}</li>')
         blocos += f'<div class="gbloco"><h3>Para {E(mes.lower())}</h3><ol>{lis}</ol></div>'
     linha = lambda k: f'''<fieldset class="linha" data-n="{k}"><legend>Ideia {k}</legend>
 <label for="ideia-{k}-tema">Tema</label><input id="ideia-{k}-tema" name="tema" type="text" maxlength="200" placeholder="Ex.: o que é ceratocone">
@@ -586,8 +596,9 @@ def grav_html():
 </div>'''
     return f'''<section class="mes fixa" id="gravacao">
   <div class="mes-head"><span class="tipo">Sugestão: 27 ou 28 de novembro · a confirmar</span><h2>Próxima gravação</h2>
-  <p class="intro">{n} vídeos para dezembro e janeiro, definidos antes da gravação para que cada um já tenha semana e sequência. Se o dia não comportar todos, a prioridade é dezembro; parte de janeiro pode sair em formato mais simples.</p></div>
+</div>
   <p class="lbl sug">Sugestões da equipe AGE</p>
+  {'<p class="sug-dica">Toque em “Gostei” ou “Prefiro não” em cada ideia. A resposta vai para a AGE.</p>' if SITE else ''}
   <div class="gwrap">{blocos}</div>
   {form}
 </section>'''
@@ -791,7 +802,7 @@ button.btn-sec {{ border: 1px solid var(--marrom); }}
 .vm-fechar {{ flex: none; font: 600 .86rem var(--texto); background: #fff; color: var(--marrom); border: 0; border-radius: 999px; padding: 8px 14px; cursor: pointer; }}
 .vm-fechar:focus-visible {{ outline: 2px solid #fff; outline-offset: 2px; }}
 .vm-player {{ position: relative; width: 100%; aspect-ratio: 9 / 16; background: #000; border-radius: 10px; overflow: hidden; }}
-.vm-player iframe {{ position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }}
+.vm-player iframe, .vm-player video {{ position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #000; object-fit: contain; }}
 html.video-aberto, html.video-aberto body {{ overflow: hidden; }}
 @media (max-width: 640px) {{
   .video-modal::backdrop {{ background: #000; }}
@@ -849,6 +860,18 @@ th {{ font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color
 .gbloco li {{ display: grid; grid-template-columns: 2.2em 1fr; gap: 0 8px; padding: 6px 0; border-bottom: 1px solid #F0ECE5; }}
 .gbloco .num {{ font-variant-numeric: tabular-nums; color: var(--bege); font-weight: 600; grid-row: span 2; }}
 .gbloco .quem {{ grid-column: 2; font-size: .88rem; }}
+.gbloco .gacoes, .gbloco .form-mudar, .gbloco .retorno {{ grid-column: 2; }}
+.gacoes {{ display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }}
+.gbtn {{ font: 600 .82rem var(--texto); background: #fff; color: var(--marrom); border: 1px solid var(--bege); border-radius: 999px; padding: 5px 12px; cursor: pointer; }}
+.gbtn:focus-visible {{ outline: 2px solid var(--marrom); outline-offset: 2px; }}
+.gbtn[aria-pressed="true"][data-voto="ok"] {{ background: #E5EDE2; border-color: var(--ok); color: var(--ok); }}
+.gbtn[aria-pressed="true"][data-voto="nao"] {{ background: #F4E1DC; border-color: var(--bad); color: var(--bad); }}
+.form-mudar {{ margin-top: 6px; display: grid; gap: 6px; }}
+.form-mudar label {{ display: grid; gap: 4px; font-size: .85rem; color: var(--cinza); }}
+.form-mudar textarea {{ font: inherit; font-size: .92rem; border: 1px solid var(--bege); border-radius: 8px; padding: 8px; }}
+.gbloco .retorno {{ margin: 4px 0 0; font-size: .82rem; color: var(--ok); }}
+.gbloco .retorno.erro {{ color: var(--bad); }}
+.sug-dica {{ margin: -6px 0 12px; font-size: .9rem; color: var(--cinza); }}
 .sug {{ margin: 0 0 10px; }}
 .ideias {{ background: var(--papel); border-radius: 10px; padding: 18px; margin-top: 18px; display: grid; gap: 12px; border-top: 4px solid var(--marrom); }}
 #linhas {{ display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }}
@@ -892,8 +915,7 @@ footer .ass {{ color: var(--tinta); }}
       <span class="assin"><span>Planejamento por</span><img class="logo-age" src="{AGE_LOGO}" alt="AGE Criação" width="72" height="35"></span>
     </div>
     <h1>Planejamento <em>editorial</em></h1>
-    <p class="sub">Instagram @clinica_modelo · outubro de 2026 a janeiro de 2027 · atualizado em 18/11/2026</p>
-    <p class="lead">O que foi planejado e o que foi publicado em outubro e novembro, e a proposta para dezembro e janeiro. Cada semana tem um tema, três conteúdos em formatos que se completam e o motivo da escolha. Para pedir ajuste ou aprovar, use “Comentar” no conteúdo ou na semana.</p>
+    <p class="sub">Instagram @clinica_modelo · outubro de 2026 a janeiro de 2027 · atualizado em 19/11/2026</p>
     <div class="regras"><span>1 tema por semana</span><span>3 conteúdos de feed: 2 Reels + 1 carrossel</span><span>Caixinha a cada 15 dias, respostas no dia seguinte</span><span>Aprovação da Dra. antes de publicar</span></div>
   </header>
   {'<div class="quem-sou"><label for="meu-nome">Comentários e aprovações enviados em nome de</label><input id="meu-nome" type="text" maxlength="80" value="Dra. Adriana"></div>' if SITE else ''}
