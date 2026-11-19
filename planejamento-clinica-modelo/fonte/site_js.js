@@ -85,7 +85,8 @@
       if (!d) return;
       if (card.querySelector(".galeria")) montarGaleria(card, d.imagens || []);
       const bv = card.querySelector(".js-video");
-      if (bv && !bv.dataset.video && d.video && (card.dataset.titulo || "").startsWith("Reels")) { bv.dataset.video = d.video; bv.hidden = false; }
+      // O link do vídeo no Trello é o que vale: substitui o que estiver na página
+      if (bv && d.video && (card.dataset.titulo || "").startsWith("Reels")) { bv.dataset.video = d.video; bv.hidden = false; }
     }).catch(() => {});
   }
  
