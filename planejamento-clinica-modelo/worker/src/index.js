@@ -7,9 +7,10 @@
 //   POST /comentario               -> {card?, texto, nome, tipo: "aprovacao"|"comentario", titulo}
 //   POST /ideia                    -> {tema, prof, obs, nome}  (comentário no card de ideias)
 //   GET  /buscar?q=título          -> procura no quadro o card de um post pelo título
-
+//   GET  /painel                   -> todos os cards das listas de produção, com data, etapa, vídeo e legenda
+ 
 const API = "https://api.trello.com/1";
-
+ 
 function cors(env, req) {
   const origem = req.headers.get("Origin") || "";
   const permitido = (env.ALLOWED_ORIGIN || "*").split(",").map(s => s.trim());
@@ -21,18 +22,18 @@ function cors(env, req) {
     "Vary": "Origin",
   };
 }
-
+ 
 function json(dados, status, env, req, extra = {}) {
   return new Response(JSON.stringify(dados), {
     status,
     headers: { "Content-Type": "application/json; charset=utf-8", ...cors(env, req), ...extra },
   });
 }
-
+ 
 function auth(env) {
   return `key=${encodeURIComponent(env.TRELLO_KEY)}&token=${encodeURIComponent(env.TRELLO_TOKEN)}`;
 }
-
+ 
 async function cardDoQuadro(env, id) {
   if (!/^[A-Za-z0-9]{6,32}$/.test(id)) return null;
   const r = await fetch(`${API}/cards/${id}?fields=id,idBoard,name,desc,shortLink&attachments=true&attachment_fields=id,name,mimeType,url,bytes,isUpload&${auth(env)}`);
@@ -40,17 +41,17 @@ async function cardDoQuadro(env, id) {
   const c = await r.json();
   return c.idBoard === env.BOARD_ID ? c : null;
 }
-
+ 
 function ordemAnexo(nome) {
   const m = /\((\d+)\)\s*\.[a-z0-9]+$/i.exec(nome);
   return m ? parseInt(m[1], 10) : 1;
 }
-
+ 
 function primeiroVideoDrive(desc) {
   const m = /drive\.google\.com\/file\/d\/([A-Za-z0-9_-]{20,})/.exec(desc || "");
   return m ? m[1] : null;
 }
-
+ 
 async function rotaCard(req, env, id) {
   const c = await cardDoQuadro(env, id);
   if (!c) return json({ erro: "card não encontrado" }, 404, env, req);
@@ -64,7 +65,7 @@ async function rotaCard(req, env, id) {
   return json({ id: c.id, nome: c.name, imagens, video: primeiroVideoDrive(c.desc) }, 200, env, req,
     { "Cache-Control": "public, max-age=300" });
 }
-
+ 
 async function rotaImagem(req, env, ctx, card, anexo, arq) {
   const cache = caches.default;
   const chave = new Request(new URL(req.url).toString());
@@ -86,11 +87,11 @@ async function rotaImagem(req, env, ctx, card, anexo, arq) {
   ctx.waitUntil(cache.put(chave, resp.clone()));
   return resp;
 }
-
+ 
 function limpa(t, max) {
   return String(t || "").replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, "").trim().slice(0, max);
 }
-
+ 
 async function rotaComentario(req, env) {
   let b;
   try { b = await req.json(); } catch { return json({ erro: "pedido inválido" }, 400, env, req); }
@@ -111,7 +112,7 @@ async function rotaComentario(req, env) {
   if (!r.ok) return json({ erro: "o Trello não aceitou o comentário" }, 502, env, req);
   return json({ ok: true }, 200, env, req);
 }
-
+ 
 async function rotaIdeia(req, env) {
   let b;
   try { b = await req.json(); } catch { return json({ erro: "pedido inválido" }, 400, env, req); }
@@ -131,12 +132,12 @@ async function rotaIdeia(req, env) {
   if (!r.ok) return json({ erro: "o Trello não aceitou a ideia" }, 502, env, req);
   return json({ ok: true }, 200, env, req);
 }
-
+ 
 function normaliza(t) {
   return String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
     .replace(/\[[^\]]*\]/g, " ").replace(/[^a-z0-9]+/g, " ").trim();
 }
-
+ 
 async function rotaBuscar(req, env, ctx) {
   const q = normaliza(new URL(req.url).searchParams.get("q"));
   if (q.length < 6) return json({ erro: "busca curta" }, 400, env, req);
@@ -151,11 +152,82 @@ async function rotaBuscar(req, env, ctx) {
     cards = (await r.json()).map(c => ({ n: normaliza(c.name), s: c.shortLink }));
     ctx.waitUntil(cache.put(chave, new Response(JSON.stringify(cards), { headers: { "Cache-Control": "max-age=300" } })));
   }
-  const achado = cards.find(c => c.n === q) || cards.find(c => c.n.includes(q) || (c.n.length >= 12 && q.includes(c.n)));
+  const achado = cards.find(c => c.n === q) || cards.find(c => q.length >= 12 && c.n.includes(q));
   return achado ? json({ card: achado.s }, 200, env, req, { "Cache-Control": "public, max-age=300" })
                 : json({ card: null }, 404, env, req);
 }
-
+ 
+// ---------------------------------------------------------------- painel
+// Etapa do card pelo nome da lista
+function etapa(nomeLista) {
+  const n = normaliza(nomeLista);
+  if (n.includes("calendario")) return "cal";
+  if (n.includes("em producao")) return "prod";
+  if (n.includes("aprovacao")) return "aprov";
+  if (n.includes("agendamento")) return "agend";
+  if (n.includes("finalizado")) return "fim";
+  if (n.includes("gaveta")) return "gaveta";
+  return null;
+}
+ 
+function limpaTexto(t) {
+  t = String(t || "").replace(/‌/g, "");
+  t = t.replace(/\[([^\[\]]*)\]\((https?:\/\/[^)]*)\)/g, (m, txt) => {
+    const k = txt.replace(/[\*\s]/g, "").toLowerCase();
+    return (k === "foto" || k === "video" || k === "vídeo" || txt.startsWith("http")) ? "" : txt;
+  });
+  t = t.replace(/\\\*/g, "").replace(/\*\*/g, "").replace(/\\/g, "");
+  t = t.replace(/\[\s*\]/g, "").replace(/[\[\]]/g, "");
+  return t.split("\n").map(l => l.replace(/\s+$/, ""))
+    .filter(l => !l.includes("Planyway") && !l.trim().startsWith("#")).join("\n").trim();
+}
+ 
+function legendaDe(desc) {
+  for (const sec of String(desc || "").split(/\n-{3,}\s*\n?/)) {
+    const s = sec.trim();
+    const [primeira, ...resto] = s.split("\n");
+    if (primeira.replace(/[\*\\#\s‌]/g, "").toLowerCase().startsWith("legenda")) return limpaTexto(resto.join("\n"));
+  }
+  return "";
+}
+ 
+function diaSP(iso) {
+  if (!iso) return null;
+  const d = new Date(new Date(iso).getTime() - 3 * 3600 * 1000);
+  return d.toISOString().slice(0, 10);
+}
+ 
+async function rotaPainel(req, env, ctx) {
+  const cache = caches.default;
+  const chave = new Request(`https://cache.local/painel/${env.BOARD_ID}`);
+  const salvo = await cache.match(chave);
+  if (salvo) return json(await salvo.json(), 200, env, req, { "Cache-Control": "public, max-age=60" });
+  const [rl, rc] = await Promise.all([
+    fetch(`${API}/boards/${env.BOARD_ID}/lists?fields=id,name&${auth(env)}`),
+    fetch(`${API}/boards/${env.BOARD_ID}/cards/open?fields=id,shortLink,name,due,dueComplete,idList,labels,desc&${auth(env)}`),
+  ]);
+  if (!rl.ok || !rc.ok) return json({ erro: "falha ao ler o Trello" }, 502, env, req);
+  const listas = Object.fromEntries((await rl.json()).map(l => [l.id, etapa(l.name)]));
+  const limite = Date.now() - 120 * 86400 * 1000;
+  const cards = [];
+  for (const c of await rc.json()) {
+    const e = listas[c.idList];
+    if (!e) continue;
+    // Finalizados antigos não interessam à página
+    if (e === "fim" && (!c.due || new Date(c.due).getTime() < limite)) continue;
+    const etiquetas = (c.labels || []).map(l => normaliza(l.name));
+    cards.push({
+      id: c.id, s: c.shortLink, nome: c.name, n: normaliza(c.name),
+      dia: diaSP(c.due), concluido: !!c.dueComplete, etapa: e,
+      gravado: etiquetas.includes("gravado"), gravar: etiquetas.includes("gravar"),
+      video: primeiroVideoDrive(c.desc), legenda: legendaDe(c.desc),
+    });
+  }
+  const dados = { atualizado: new Date().toISOString(), cards };
+  ctx.waitUntil(cache.put(chave, new Response(JSON.stringify(dados), { headers: { "Cache-Control": "max-age=120" } })));
+  return json(dados, 200, env, req, { "Cache-Control": "public, max-age=60" });
+}
+ 
 export default {
   async fetch(req, env, ctx) {
     if (req.method === "OPTIONS") return new Response(null, { headers: cors(env, req) });
@@ -166,9 +238,11 @@ export default {
       if (req.method === "POST" && p[0] === "comentario") return await rotaComentario(req, env);
       if (req.method === "POST" && p[0] === "ideia") return await rotaIdeia(req, env);
       if (req.method === "GET" && p[0] === "buscar") return await rotaBuscar(req, env, ctx);
+      if (req.method === "GET" && p[0] === "painel") return await rotaPainel(req, env, ctx);
       return json({ ok: true, servico: "planejamento-clinica-modelo" }, 200, env, req);
     } catch (e) {
       return json({ erro: "falha inesperada" }, 500, env, req);
     }
   },
 };
+ 
