@@ -253,6 +253,14 @@ MESES = [
  },
 ]
  
+BANCO_IDS = {
+    "5 exames importantes para o glaucoma": ["6a3c72c4ea1da84fb322a915", "6ac7062c80d74304c399aef9"],
+    "Exames para diagnóstico e acompanhamento do glaucoma": ["6a3c739c7f15271eda0c33b5"],
+    "3 lugares onde você pode pegar conjuntivite": ["6935a59fe9bf2ad7db1eb61c"],
+    "Exames para avaliação da retina": ["6a65e5dacf56e033af83bd74"],
+    "Medir a pressão intraocular": ["6a6fb7b3bc3dcb213a470fae"],
+}
+ 
 BANCO = [
  ("Reels", "5 exames importantes para o glaucoma", "Dra. Adriana + Dr. Alisson", "Gravado", "Março de 2027, na Semana Mundial do Glaucoma", "", "1zdZ9M3ZuLjuLMu6HuPU0e24uT4_PA6Vo"),
  ("Carrossel", "Exames para diagnóstico e acompanhamento do glaucoma", "", "Em produção", "Março de 2027", "", ""),
@@ -303,8 +311,7 @@ def item_html(it, mes_id, wi, ii):
         datas.append(f'<span><b>{"Previsto" if st in ("prop","rev") else "Planejado"}</b> {fd(it["plan"])}</span>')
     if it.get("feito"):
         datas.append(f'<span><b>{"Publica" if st=="prog" else "Publicado"}</b> {fd(it["feito"])}</span>')
-    if datas:
-        linhas.append('<p class="datas">' + "".join(datas) + "</p>")
+    linhas.append('<p class="datas">' + "".join(datas) + "</p>")
     if it.get("aprov"):
         linhas.append(f'<p class="aprov"><b>Aprovação</b> {E(it["aprov"])}</p>')
     if it.get("dra"):
@@ -352,10 +359,13 @@ def item_html(it, mes_id, wi, ii):
         if extras:
             linhas.append(extras)
     cid = f"{mes_id}-s{wi+1}-c{ii+1}"
-    dados = f' data-card="{it.get("trello","")}" data-titulo="{E(it["fmt"] + ": " + it["titulo"])}" data-pendente="{1 if st in ("prop","rev","prog") else 0}"' if SITE else ""
+    dia = it.get("feito") or it.get("plan") or ""
+    dados = (f' data-card="{it.get("trello","")}" data-titulo="{E(it["fmt"] + ": " + it["titulo"])}" data-pendente="{1 if st in ("prop","rev","prog") else 0}"'
+             f' data-dia="{dia}" data-fmt="{E(it["fmt"])}" data-st="{st}" data-sync="{1 if st in ("prop","rev","prog") else 0}"'
+             f'{" data-dra=1" if it.get("dra") else ""}') if SITE else ""
     return f'''<article class="card st-{st}{" depende-dra" if it.get("dra") else ""}" id="{cid}" data-comment-target{dados}>
   <div class="card-top"><span class="fmt">{E(it["fmt"])}</span><span class="chips">{chip(st)}{extra}</span></div>
-  <h4>{E(it["titulo"])}</h4>
+  <h4 class="tit">{E(it["titulo"])}</h4>
   {"".join(linhas)}
   <button class="cmt" type="button" hidden>Comentar</button>
 </article>'''
@@ -364,6 +374,16 @@ PLURAL = {"pub": ("publicado", "publicados"), "reprov": ("reprovado", "reprovado
           "nexec": ("não produzido", "não produzidos"), "adiado": ("adiado", "adiados"),
           "rev": ("em revisão", "em revisão"), "prog": ("programado", "programados"),
           "prop": ("proposto", "propostos")}
+ 
+def ini_iso(datas, mes_id):
+    ini, fim = [x.strip() for x in datas.split(" a ")]
+    fd_, fm = fim.split("/")
+    if "/" in ini:
+        dd, mm = ini.split("/")
+    else:
+        dd, mm = ini, fm
+    ano = 2027 if (mes_id == "janeiro" and mm == "01") else 2026
+    return f"{ano}-{mm}-{int(dd):02d}"
  
 def fim_iso(datas, mes_id):
     dd, mm = datas.split(" a ")[-1].strip().split("/")
@@ -390,7 +410,7 @@ def semana_html(s, mes_id, wi):
     for it in s["itens"]:
         cont[it["st"]] = cont.get(it["st"], 0) + 1
     resumo = "".join(f'<span class="chip c-{STATUS[k][1]}">{v} {PLURAL[k][0 if v == 1 else 1]}</span>' for k, v in cont.items())
-    return f'''<details class="semana" id="{mes_id}-s{wi+1}" data-fim="{fim_iso(s["datas"], mes_id)}" data-comment-target open>
+    return f'''<details class="semana" id="{mes_id}-s{wi+1}" data-inicio="{ini_iso(s["datas"], mes_id)}" data-fim="{fim_iso(s["datas"], mes_id)}" data-comment-target open>
   <summary class="sem-head">
     <span class="sem-datas">{E(s["datas"])}</span>
     <span class="sem-tit"><h3>{E(s["tema"])}</h3>{nova}</span>
@@ -527,7 +547,8 @@ def banco_html():
             else:
                 btn = f'<a class="btn-ver" href="{drive(v)}" target="_blank" rel="noopener">▶ Ver vídeo</a>'
             linhas.append(f'<div class="acoes-card">{btn}</div>')
-        cards += f'''<article class="card" data-comment-target>
+        ids = " ".join(BANCO_IDS.get(t, []))
+        cards += f'''<article class="card banco-item" data-ids="{ids}" data-comment-target>
   <div class="card-top"><span class="fmt">{E(f)}</span><span class="chips">{ch}</span></div>
   <h4>{E(t)}</h4>
   {"".join(linhas)}
@@ -536,7 +557,7 @@ def banco_html():
     return f'''<section class="mes" id="banco">
   <div class="mes-head"><span class="tipo">Material pronto ou em andamento</span><h2>Banco de vídeos e posts</h2>
   <p class="intro">O que está gravado ou produzido e ainda não tem semana, com a sugestão de quando entra.</p></div>
-  <div class="grid">{cards}</div>
+  <div class="grid" id="banco-grid">{cards}</div>
 </section>'''
  
 def grav_html():
@@ -589,8 +610,9 @@ def pend_dra_html():
  
 legenda = "".join(chip(k) for k in ["pub","prog","rev","adiado","reprov","nexec","prop"]) + '<span class="chip m-ready">Gravado / pronto</span><span class="chip m-todo">A gravar / a produzir</span>'
  
+STATUS_JS = "window.PLAN_STATUS = " + _json.dumps({k: [STATUS[k][0], STATUS[k][1], PLURAL.get(k, (STATUS[k][0].lower(), STATUS[k][0].lower()))] for k in STATUS}, ensure_ascii=False) + ";"
 CLAUDE_JS = ""  # a versão do Claude (artifact) não é gerada neste repositório
-SCRIPT_FINAL = open(AQUI / 'site_js.js').read() if SITE else CLAUDE_JS
+SCRIPT_FINAL = (STATUS_JS + "\n" + open(AQUI / 'site_js.js').read()) if SITE else CLAUDE_JS
  
 page = f'''<!DOCTYPE html>
 <html lang="pt-BR">
@@ -770,6 +792,16 @@ button.btn-sec {{ border: 1px solid var(--marrom); }}
 .vm-fechar:focus-visible {{ outline: 2px solid #fff; outline-offset: 2px; }}
 .vm-player {{ position: relative; width: 100%; aspect-ratio: 9 / 16; background: #000; border-radius: 10px; overflow: hidden; }}
 .vm-player iframe {{ position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }}
+html.video-aberto, html.video-aberto body {{ overflow: hidden; }}
+@media (max-width: 640px) {{
+  .video-modal::backdrop {{ background: #000; }}
+  .video-modal {{ background: #000; }}
+  .vm-box {{ inset: 0; margin: 0; width: 100%; height: 100%; gap: 0;
+    padding: max(env(safe-area-inset-top), 10px) 0 max(env(safe-area-inset-bottom), 10px); box-sizing: border-box; }}
+  .vm-top {{ padding: 0 12px 10px; }}
+  .vm-titulo {{ font-size: .85rem; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }}
+  .vm-player {{ flex: 1; min-height: 0; aspect-ratio: auto; border-radius: 0; }}
+}}
 .galeria {{ margin-top: 8px; display: flex; gap: 8px; overflow-x: auto; scroll-snap-type: x mandatory; border-radius: 8px; }}
 .galeria img {{ flex: 0 0 100%; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; scroll-snap-align: start; border-radius: 8px; background: #F1ECE4; }}
 .galeria-nav {{ display: flex; justify-content: space-between; align-items: center; font-size: .8rem; color: var(--cinza); margin-top: 4px; }}
@@ -904,7 +936,9 @@ footer .ass {{ color: var(--tinta); }}
   const hoje = t.getFullYear() + "-" + String(t.getMonth() + 1).padStart(2, "0") + "-" + String(t.getDate()).padStart(2, "0");
   document.querySelectorAll("details.semana[data-fim]").forEach(d => {{ if (d.dataset.fim < hoje) d.open = false; }});
   document.querySelectorAll('.cal-d[data-dia="' + hoje + '"]').forEach(c => c.classList.add("hoje"));
-  document.querySelectorAll(".cal-p, .js-ir").forEach(b => b.addEventListener("click", () => {{
+  document.addEventListener("click", e => {{
+    const b = e.target.closest(".cal-p, .js-ir");
+    if (!b) return;
     const alvo = document.getElementById(b.dataset.alvo);
     if (!alvo) return;
     const sec = alvo.closest("section.mes");
@@ -914,7 +948,7 @@ footer .ass {{ color: var(--tinta); }}
     alvo.scrollIntoView({{ block: "center", behavior: "smooth" }});
     alvo.classList.add("destaque");
     setTimeout(() => alvo.classList.remove("destaque"), 1800);
-  }}));
+  }});
   mostrar(false);
 }})();
 {SCRIPT_FINAL}</script>
