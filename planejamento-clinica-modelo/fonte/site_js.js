@@ -108,17 +108,25 @@
     if (cm2) cm2.closest(".form-mudar").hidden = true;
   });
  
+  // Voto em cada ideia de gravação: tocar de novo no botão marcado desfaz
+  const chaveVoto = li => "voto-" + li.dataset.card;
+  const marcar = (li, voto) => li.querySelectorAll(".js-ideia").forEach(x => x.setAttribute("aria-pressed", String(!!voto && x.dataset.voto === voto)));
+  document.querySelectorAll("li.gsug").forEach(li => { try { const v = localStorage.getItem(chaveVoto(li)); if (v) marcar(li, v); } catch (e) {} });
+ 
   async function votar(b) {
     const li = b.closest("li.gsug");
     const ret = li.querySelector(".retorno");
-    const ok = b.dataset.voto === "ok";
+    const desfazer = b.getAttribute("aria-pressed") === "true";
+    const voto = desfazer ? null : b.dataset.voto;
+    const texto = desfazer ? "↩️ Desfiz minha avaliação desta ideia de gravação."
+      : voto === "ok" ? "👍 Gostei desta ideia para a próxima gravação." : "👎 Prefiro não gravar esta ideia.";
     li.querySelectorAll(".js-ideia").forEach(x => { x.disabled = true; });
     avisar(ret, "Enviando…");
     try {
-      await enviar("/comentario", { card: li.dataset.card, titulo: li.dataset.titulo, tipo: "comentario", nome: nome(),
-        texto: ok ? "👍 Gostei desta ideia para a próxima gravação." : "👎 Prefiro não gravar esta ideia." });
-      li.querySelectorAll(".js-ideia").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
-      avisar(ret, ok ? "Registrado: a senhora gostou desta ideia." : "Registrado. Se quiser, diga o motivo em “Sugerir mudança”.");
+      await enviar("/comentario", { card: li.dataset.card, titulo: li.dataset.titulo, tipo: "comentario", nome: nome(), texto });
+      marcar(li, voto);
+      try { voto ? localStorage.setItem(chaveVoto(li), voto) : localStorage.removeItem(chaveVoto(li)); } catch (e) {}
+      avisar(ret, desfazer ? "Avaliação desfeita." : voto === "ok" ? "Registrado: a senhora gostou desta ideia." : "Registrado. Se quiser, diga o motivo em “Sugerir mudança”.");
     } catch (err) { avisar(ret, err.message, true); }
     li.querySelectorAll(".js-ideia").forEach(x => { x.disabled = false; });
   }
