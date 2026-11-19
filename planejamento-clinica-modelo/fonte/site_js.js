@@ -29,7 +29,7 @@
   const modal = document.getElementById("video-modal");
   const vmPlayer = modal && modal.querySelector(".vm-player");
   const vmTitulo = modal && modal.querySelector(".vm-titulo");
-  function abrirVideo(id, titulo) {
+  function playerDrive(id, titulo) {
     vmPlayer.innerHTML = "";
     const f = document.createElement("iframe");
     f.src = "https://drive.google.com/file/d/" + encodeURIComponent(id) + "/preview";
@@ -37,6 +37,22 @@
     f.allowFullscreen = true;
     f.title = "Vídeo: " + titulo;
     vmPlayer.appendChild(f);
+  }
+  function abrirVideo(id, titulo) {
+    vmPlayer.innerHTML = "";
+    if (API) {
+      const v = document.createElement("video");
+      v.controls = true;
+      v.playsInline = true;
+      v.setAttribute("playsinline", "");
+      v.preload = "auto";
+      v.title = "Vídeo: " + titulo;
+      v.addEventListener("error", () => playerDrive(id, titulo), { once: true });
+      v.src = API + "/video/" + encodeURIComponent(id);
+      vmPlayer.appendChild(v);
+      const p = v.play();
+      if (p && p.catch) p.catch(() => {});
+    } else playerDrive(id, titulo);
     vmTitulo.textContent = titulo.replace(/^[^:]+:\s*/, "");
     document.documentElement.classList.add("video-aberto");
     modal.showModal();
@@ -78,10 +94,53 @@
     const cn = e.target.closest(".js-cancelar");
     if (cn) { cn.closest(".form-cmt").hidden = true; return; }
     const sem = e.target.closest(".js-aprovar-semana");
-    if (sem) aprovarSemana(sem);
+    if (sem) { aprovarSemana(sem); return; }
+    const voto = e.target.closest(".js-ideia");
+    if (voto) { votar(voto); return; }
+    const mudar = e.target.closest(".js-ideia-mudar");
+    if (mudar) {
+      const f = mudar.closest("li").querySelector(".form-mudar");
+      f.hidden = !f.hidden;
+      if (!f.hidden) f.querySelector("textarea").focus();
+      return;
+    }
+    const cm2 = e.target.closest(".js-cancelar-mudar");
+    if (cm2) cm2.closest(".form-mudar").hidden = true;
   });
  
+  async function votar(b) {
+    const li = b.closest("li.gsug");
+    const ret = li.querySelector(".retorno");
+    const ok = b.dataset.voto === "ok";
+    li.querySelectorAll(".js-ideia").forEach(x => { x.disabled = true; });
+    avisar(ret, "Enviando…");
+    try {
+      await enviar("/comentario", { card: li.dataset.card, titulo: li.dataset.titulo, tipo: "comentario", nome: nome(),
+        texto: ok ? "👍 Gostei desta ideia para a próxima gravação." : "👎 Prefiro não gravar esta ideia." });
+      li.querySelectorAll(".js-ideia").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+      avisar(ret, ok ? "Registrado: a senhora gostou desta ideia." : "Registrado. Se quiser, diga o motivo em “Sugerir mudança”.");
+    } catch (err) { avisar(ret, err.message, true); }
+    li.querySelectorAll(".js-ideia").forEach(x => { x.disabled = false; });
+  }
+ 
   document.addEventListener("submit", async e => {
+    const fm = e.target.closest(".form-mudar");
+    if (fm) {
+      e.preventDefault();
+      const li = fm.closest("li.gsug");
+      const ret = li.querySelector(".retorno");
+      const texto = fm.querySelector("textarea").value.trim();
+      if (!texto) { avisar(ret, "Escreva a sugestão antes de enviar.", true); return; }
+      const btn = fm.querySelector('button[type="submit"]');
+      btn.disabled = true; avisar(ret, "Enviando…");
+      try {
+        await enviar("/comentario", { card: li.dataset.card, titulo: li.dataset.titulo, tipo: "comentario", nome: nome(),
+          texto: "✏️ Sugestão de mudança para a gravação: " + texto });
+        fm.querySelector("textarea").value = ""; fm.hidden = true; avisar(ret, "Sugestão enviada. Obrigada!");
+      } catch (err) { avisar(ret, err.message, true); }
+      btn.disabled = false;
+      return;
+    }
     const f = e.target.closest(".form-cmt");
     if (!f) return;
     e.preventDefault();
